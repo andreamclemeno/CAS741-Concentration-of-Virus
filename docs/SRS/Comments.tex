@@ -1,8 +1,22 @@
-\documentclass[12pt]{article}
+%% Comments
 
-\usepackage{fullpage}
+\usepackage{color}
 
-\begin{document}
+\newif\ifcomments\commentstrue
 
-\end{document}
+\ifcomments
+\newcommand{\authornote}[3]{\textcolor{#1}{[#3 ---#2]}}
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\else
+\newcommand{\authornote}[3]{}
+\newcommand{\todo}[1]{}
+\fi
 
+\newcommand{\wss}[1]{\authornote{blue}{SS}{#1}} 
+\newcommand{\plt}[1]{\authornote{magenta}{TPLT}{#1}} %For explanation of the template
+\newcommand{\an}[1]{\authornote{cyan}{Author}{#1}}
+
+%% Common Parts
+
+\newcommand{\progname}{diagnosis-AIDs} % PUT YOUR PROGRAM NAME HERE %Every program
+                                % should have a name
