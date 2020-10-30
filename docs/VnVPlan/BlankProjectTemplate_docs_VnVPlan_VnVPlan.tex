@@ -1,0 +1,878 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+
+
+% from SRS
+\usepackage{amsmath, mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage{xr}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{xfrac}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{pdflscape}
+\usepackage{afterpage}
+%%%
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+
+\input{../Comments}
+\input{../Common}
+
+\newcounter{tinnum} %Likely change number
+\newcommand{\lthetinnum}{Tinput\thetinnum}
+\newcommand{\tinref}[1]{Tinput\ref{#1}}
+
+
+\begin{document}
+
+\title{Medical Diagnosis Prediction Tool: System Verification and Validation 
+Plan for diagnosisAIDS} 
+\author{Andrea Clemeno}
+\date{\today}
+	
+\maketitle
+
+\pagenumbering{roman}
+
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+10/29/2020 & 1.0 & First Draft of VnV\\
+%Date 2 & 1.1 & Notes\\
+\bottomrule
+\end{tabularx}
+
+\newpage
+
+\tableofcontents
+~\newpage
+\listoftables
+~\newpage
+
+\newpage
+
+\section{Symbols, Abbreviations and Acronyms}
+
+The following tables identify the symbols, abbreviations and acronyms use 
+throughout this document.
+  
+\subsection{Table of Symbols}
+
+The table that follows summarizes the symbols used in this document along with
+their units. The symbols are listed in alphabetical order.
+
+\begin{table}[ht]
+\renewcommand{\arraystretch}{1.2}
+%\noindent \begin{tabularx}{1.0\textwidth}{l l X}
+\noindent \begin{longtable*}{l l p{7cm}} \toprule
+\textbf{symbol} & \textbf{unit} & \textbf{description}\\
+\midrule 
+$A_1$ & \si[per-mode=symbol] {$1 / 10^{-3}m^3}$} & initial amount of substance
+\\
+$A_2$ & \si[per-mode=symbol]{$1 / 10^{-3}m^3}$} & amount of substance at second 
+instance 
+\\ 
+$isDecaying$ & - & requirement of decaying rate of change
+\\
+$N_0$ & \si[per-mode=symbol] {\mol} & initial amount of substance
+\\
+$N_t$ & \si[per-mode=symbol] {\mol} & amount of substance at time, t  
+\\
+$rate_D$ & \si[per-mode=symbol] {{$\dfrac{1 / 10^{-3}m^3}{s}$}} & the rate of 
+decaying
+\\
+$t$ & \si[per-mode=symbol] {\second} & time
+\\
+$t_1$ & \si[per-mode=symbol] {\second} & time at instance 1
+\\
+$t_2$ & \si[per-mode=symbol] {\second} & time at instance 2
+\\
+$VL$ & \si[per-mode=symbol] {$\dfrac{virions}{10^{-3}m^3}$} & Viral Load
+\\
+$VL_n$ & \si[per-mode=symbol] {$\dfrac{virions}{10^{-3}m^3}$} & Viral Load at 
+instance n
+\\
+$VL_1$ & \si[per-mode=symbol] {$\dfrac{virions}{10^{-3}m^3}$} & Viral Load at 
+instance 1
+\\
+$VL_2$ & \si[per-mode=symbol] {$\dfrac{virions}{10^{-3}m^3}$} & Viral Load at 
+instance 2
+&\\
+$\lambda$ & \si[per-mode=symbol] {{$\dfrac{ virions / 10^{-3}m^3}{s}$}} & the 
+rate of decaying
+&\\
+\bottomrule
+
+\end{longtable*}
+\caption{Table of Symbols}
+\end{table}
+
+
+
+\subsection{Abbreviations and Acronyms}
+
+The table that follows summarizes the symbols used in this document that allude 
+to different sections of the Software Requirements Specification. The symbols 
+are listed in alphabetical order.
+\begin{table}[ht]
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l l} 
+  \toprule		
+  \textbf{symbol} & \textbf{description}\\
+  \midrule 
+  A & Assumption\\
+  DD & Data Definition\\
+  GD & General Definition\\
+  GS & Goal Statement\\
+  IM & Instance Model\\
+  LC & Likely Change\\
+  PS & Physical System Description\\
+  R & Requirement\\
+  SRS & Software Requirements Specification\\
+  diagnosis-AIDS & Medical Diagnosis Prediction Tool \\
+   & for Acquired immunodeficiency syndrome (AIDS)\\
+  T & Theoretical Model\\
+  ULC & Unlikely Change\\
+  \bottomrule
+\end{tabular}\\
+\end{center}
+\caption{Table of Abbreviations and Acronyms}
+
+\end{table}
+
+\newpage
+
+\pagenumbering{arabic}
+
+This document outlines the verification and validation plans for components 
+significant for the implementation of the diagnosisAIDs program, including the 
+SRS, design, implementation and software validation. Following this, the system 
+tests for functional and non-functional requirements are indicated. Moreover, 
+how test cases meet requirements will be identified. After describing the system 
+testing, the unit testing for all requirements using different modules will be 
+explained as well as the traceability from the test cases to the modules.
+
+\section{General Information}
+
+\subsection{Summary}
+
+The software being tested works with viral load concentrations from patients 
+with  AIDs to determine the efficiency of their immune system when being 
+affected with the HIV-1 virus. The efficiency will help predict the viral load 
+concentration of the patients after 30 days. Using the estimated viral load 
+prediction, the possible progression of the patient to AIDs will be identified.
+
+\subsection{Objectives}
+
+The objective of the medical diagnosis prediction tool is to provide estimated 
+predictions that are feasible and are accurate. The various intended users of 
+the software will need to view the results easily. Lastly, the software should 
+store and display data for multiple patients in a timely manner. The following 
+VnV plan will build confidence in the software correctness, demonstrate adequate 
+usability for the intended users, and ensure efficient software performance.
+
+\subsection{Relevant Documentation}
+
+The diagnosisAIDs program will use different documentation to identify it's 
+purpose and the development methods used. The documentation includes the SRS (\citet{SRS}), the following Verification and Validation Plan, and a Drasil code and Report.
+
+
+
+\section{Plan}
+	
+\subsection{Verification and Validation Team}
+
+Verification and validation are methods used to build confidence in the 
+software. The following document will be reviewed by: the domain expert 
+reviewer, Elizabeth Hofer, and the secondary reviewer, John Ernsthausen. In 
+addition, Dr. Smith, the CAS 741 course instructor, will review the VnV plan. 
+The reviewers will ensure the document is in accordance with the VnV plan 
+checklist (\citet{Vnvchecklist}). 
+
+\subsection{SRS Verification Plan}
+
+The verification of the SRS will be done to ensure that the requirements 
+specified are in alignment with the outlined objective of the diagnosisAIDs 
+program. The SRS verification plan  will involve reviewing the document against 
+the SRS checklist and providing feedback using issues on GitHub repository (\citet{SRSchecklist}). The 
+reviewers that will verify the SRS document include: the class instructor, Dr. 
+Smith;  the domain expert reviewer, Elizabeth Hofer; the secondary reviewer, 
+Tiago de Moraes Machado.
+
+\subsection{Design Verification Plan}
+
+The design of the software will be documented extensively with several reports 
+including the SRS, VnV plans, and Drasil report. The verification process will be 
+completed manually through document inspections completed by at least four 
+project reviewers for each document; the reviewers include the project 
+developer, domain expert, the secondary reviewer and the class instructor. The 
+verification will be completed using several checklists for the necessary 
+documents, including the SRS checklist the VnV checklist. 
+After inspecting the design, the reviewers will be tasked to provide feedback on 
+the software design using issues on Github. 
+
+\subsection{Implementation Verification Plan}
+
+The implementation of the software will be verified with several static methods 
+involving manual or automated interactions. The software will be developed using 
+the Drasil Framework to generate all of the software artifacts.\citet{Drasil}. The code 
+developed uses python to achieve goals and fulfill requirements in the SRS. The 
+design of the code will be evaluated by the project developer, domain expert, 
+the secondary reviewer and the class instructor. The evaluation will involve 
+code inspections where coding syntax, structure and standards are upheld. In 
+addition, code walkthroughs will be performed where the evaluators will try to 
+determine the output of the code using the code with little to no context. The 
+code walkthrough will verify that the requirements and goals of the code are 
+met. Moreover, automatic methods will verify the design by displaying success 
+messages after certain checkpoints throughout the code. The mentioned tests will 
+be explained in more detail in Section 5.
+
+
+\subsection{Automated Testing and Verification Tools}
+
+The diagnosisAIDs software will be tested and verified with several tools for 
+unit and systems testing, static and dynamic analysis, linting and continuous 
+integration. The static automatic testing will be completed in Spyder, a Python 
+Integrated Development Environment, using several checkpoints with success and 
+failure indicators. Additionally, the Spyder platform will analyze the code for 
+potential errors in the process of linting. For testing performance optimization 
+dynamically, a python profiler called cProfile will be used to profile speed (\citet{cProfile}).
+
+Automated testing will be implemented for individual units as well as the 
+integrated system to ensure that all the sections work separately and together 
+seamlessly. In terms of unit  testing, each unit will be tested with the 
+unittest python library within Spyder. Respectively, the systems test will be 
+completed through black box testing with the Python Black Box tool called pbbt.
+t
+
+Lastly, the implementation of the design will be verified with continuous 
+integration through Travis CI that is used in conjunction with Drasil. Drasil 
+implements Travis CI to integrate code into a Github repository each day to 
+complete automated tests to verify the code (\citet{Drasil}). 
+
+\begin{table}[ht]
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l l} 
+  \toprule		
+  \textbf{Test} & \textbf{Verification Tool}\\
+  \midrule 
+  Static Analysis & Spyder\\
+  Linting & Spyder\\
+  Dynamic Analysis & cProfile \\
+  System Test & Blackbox testing using pbbt\\
+  Unit Test & Unittest within Spyder \\
+  Continuous Integration & Travis CI\\
+  \bottomrule
+\end{tabular}\\
+\end{center}
+\caption{Automated Testing and Verification Tools}
+
+\end{table}
+
+\newpage
+
+\subsection{Software Validation Plan}
+
+The software validation plan will be implemented at the end of the development 
+process to determine if the real world problem is characterized correctly. The 
+validation of diagnosisAIDs will be completed by comparing the outputs of the 
+software to several cases from scientific study called Viral Dynamics of Acute 
+HIV-1 Infection seen in The Journal of Experimental Medicine (\citet{viraldynamics}).
+
+\section{System Test Description}
+	
+\subsection{Tests for Functional Requirements}
+
+This section will define the tests to ensure diagnosisAIDs meets the functional 
+requirements seen in the SRS document for diagnosisAIDs. The subsections combine 
+several requirements that are be separated based on common ideas.
+
+\subsubsection{Testing inputs}
+
+The user-defined inputs will undergo tests to ensure that numerical data was 
+received and aligns with the input constraints. The tests will automatically 
+display feedback if the conditions above are not met. The tests called 
+id-added, input-received and input-verify are described in greater detail below: 
+
+\paragraph{Input Testing}
+
+\begin{enumerate}
+
+\item{id-added\\}
+
+Control: Automatic
+					
+Initial State: diagnosisAIDs running
+
+Input:
+
+\begin{itemize}
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_1}:] $id$ = 
+$123$% Test case where id is added
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_2}:] $id$ = "   
+"% Test case where no id detected
+\end{itemize}
+
+
+Output: 
+\begin{itemize}
+\item Test output 1: "id-added: success"
+\item Test output 3: "id-added: failure. Try again."
+\end{itemize}
+
+Test Case Derivation:\\
+The expected result for the given inputs will be either "id-added: success" or  
+"id-added: failure. Try again." When the user inputs an id, the inputs will be 
+received successfully. In comparison, any nonsensical data inputs like a null 
+input will cause this test to output a failure.\\
+
+How test will be performed: \\
+This automatic static test will be completed in Spyder using if-then-else loop 
+conditions to display the previously mentioned output. \\
+
+
+\paragraph{Input Testing}
+
+\begin{enumerate}
+
+\item{input-received\\}
+
+Control: Automatic
+					
+Initial State: diagnosisAIDs running
+					
+Input:
+\begin{itemize}
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_3}:]$V_1$ = $5*10^8$, $V_2$ = $4*10^8$% Test case where V1>V2
+
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_4}:] $V_1$ = $5*10^8$, $V_2$ = $6*10^8$% Test case where V1<V2
+
+% Test case with two nonsensical data
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_5}:] $V_1$ = abc123 , $V_2$ = $6*10^8$  
+% Test case with two nonsensical data
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_6}:] $V_1$ = abc123 , $V_2$ = 789xyz 
+\end{itemize}
+
+Output: 
+\begin{itemize}
+\item Test output 1: "input-received: success"
+\item Test output 2: "input-received: success" 
+\item Test output 3: "input-received: failure. Try again with numerical values."
+\item Test output 4: "input-received: failure. Try again with numerical values."
+\end{itemize}
+
+Test Case Derivation:\\
+The expected result for the given inputs will be either 
+"input-received: success." or  "input-received: failure. Try again with 
+numerical values." When the user-defined inputs are numbers, the inputs will be 
+received successfully. In comparison, any nonsensical data inputs for one or 
+more of the inputs will cause this test to output a failure.\\
+
+How test will be performed: \\
+This automatic static test will be completed in Spyder using if-then-else loop 
+conditions to display the previously mentioned output. \\
+
+					
+\item{input-verify\\}
+
+Control: Automatic
+					
+Initial State: diagnosisAIDs running and input-received is successful
+					
+Input:
+\begin{itemize} % Test case where
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_7}:] $V_1$ = $2*10^8$, $V_2$ = $5*10^8$ % V1<V2
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_8}:]$V_1$ = $5*10^8$, $V_2$ = $5*10^8$% V1=V2
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_9}:] $V_1$ = $5*10^8$, $V_2$ = $4*10^8$% V1>V2
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_10}:]$V_1$ = $10*10^8$, $V_2$ = $6*10^8$% V1>>V2
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_11}:]$V_1$ = $20*10^8$, $V_2$ = $5*10^8$% V1>>>V2
+
+\end{itemize}
+
+Output: 
+\begin{itemize}
+\item Test output 1: "input-verify: failure; $V_1$ should be greater than 
+$V_2$."
+\item Test output 2: "input-verify: failure; $V_1$ should be greater than 
+$V_2$." 
+\item Test output 3: "input-verify: success"
+\item Test output 4: "input-verify: success"
+\item Test output 5: "input-verify success"
+\end{itemize}
+
+Test Case Derivation:\\
+The expected result for the given inputs will be either "input-verify: success" 
+or  "input-verify: failure; $V_1$ should be greater than $V_2$." According to 
+the input constraints specified in the SRS, the program can only determine the 
+rate of clearance of the virus when the virus starts decreasing due the immune 
+system affecting virus concentration. When the user-defined inputs include a 
+greater $V_2$, the viral has yet to decrease and therefore, the input 
+constraints are not met and the output is failure for test input 1.\\
+
+How test will be performed: \\
+This automatic static test will be completed in Spyder using if-then-else loop 
+conditions to display the previously mentioned output. \\
+
+\end{enumerate}
+					
+\subsubsection{Testing outputs}
+
+The produced output will undergo tests to ensure that data is produced, aligns 
+with the output constraints and is displayed to the user. The output-produced 
+and output-valid tests will automatically display feedback if the conditions 
+above are not met. The output-displayed test will be manual in the form of a 
+checked box that will be checked by the user if the outputs are displayed. The 
+tests called output-produced, output-verify and output-displayed are described 
+in greater detail below: 
+		
+\paragraph{Output Testing}
+
+\begin{enumerate}
+
+\item{output-produced\\}
+
+Control: Automatic
+					
+Initial State: diagnosisAIDs analysis completed 
+					
+Input:
+\begin{itemize}
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_12}:] 
+$\dfrac{dV}{dt} = 1.3$ %  
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_13}:]
+$\dfrac{dV}{dt} = undefined$ % no value, null value
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_14}:] 
+$\dfrac{dV}{dt} = 0$ % no value, null value
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_15}:] 
+$\dfrac{dV}{dt} = -0.3$
+
+\end{itemize}
+
+Output: 
+\begin{itemize}
+\item Test output 1: "output-produced: success"
+\item Test output 2: "output-produced: failure"
+\item Test output 2: "output-produced: success" 
+\item Test output 3: "output-produced: success"
+
+\end{itemize}
+
+Test Case Derivation:\\
+The expected result for the given inputs will be either: "output-produced: 
+success" or  "output-produced: failure". When the program produces an output, 
+whether negative, zero or positive, a numerical value will have a successful 
+result in this test. When an undefined result is produced, this test to output a 
+failure.\\
+
+How test will be performed: \\
+This automatic static test will be completed in Spyder using if-then-else loop 
+conditions to display the previously mentioned output. \\
+
+					
+\item{output-verify\\}
+
+Control: Automatic
+					
+Initial State: diagnosisAIDs analysis completed; output-program is successful
+					
+Input:
+\begin{itemize}
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_16}:] 
+$\dfrac{dV}{dt} = 1.3$ % rise 
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_17}:] 
+$\dfrac{dV}{dt} = 0$ % at peak
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_18}:] 
+$\dfrac{dV}{dt} = -0.3$
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_19}:]
+$\dfrac{dV}{dt} = -0.7$ 
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_20}:]
+}$\dfrac{dV}{dt} = -0.9$ 
+\end{itemize}
+
+
+Output: 
+\begin{itemize}
+\item Test output 1: "output-verify: failure"
+\item Test output 2: "output-verify: failure" 
+\item Test output 3: "output-verify: success"
+\item Test output 4: "output-verify: success"
+\item Test output 5: "output-verify: success"
+\end{itemize}
+
+Test Case Derivation:\\
+The expected result for the produced outputs will be either "output-verify: 
+success" or  "output-verify: failure". According to the output constraints 
+specified in the SRS, IM1 defines the rate of clearance of the virus is a 
+negative value. When the outputproduced by the program ($\dfrac{dV}{dt}$) is 
+greater than or equivalent to 0, the viral load has yet to decrease and 
+therefore, the output constraints are not met and the test will fail.\\
+
+How test will be performed: \\
+This automatic static test will be completed in Spyder using if-then-else loop 
+conditions to display the previously mentioned output. \\
+
+\item{output-displayed\\}
+
+Control: Manual
+					
+Initial State: diagnosisAIDs analysis completed; output-program , output-valid 
+are successful
+					
+Input:
+\begin{itemize} % Test case where
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_21}:] 
+$\dfrac{dV}{dt} = -0.3$, user indicates "displayed".
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_22}:] 
+$\dfrac{dV}{dt} = -0.9$, user indicates "displayed".
+\item[Test input \refstepcounter{tinnum}\thetinnum\label{Tinput_23}:] 
+$\dfrac{dV}{dt} = "     "$, user indicates "not displayed".
+\end{itemize}
+
+Output: 
+\begin{itemize}
+\item Test output 1: "output-displayed: success"
+\item Test output 2: "output-displayed: success" 
+\item Test output 3: "output-displayed: failure"
+\end{itemize}
+
+Test Case Derivation:\\
+Possibilities of inputs and outputs of the test are identified above. In this 
+test, the user will indicate if the output is displayed. The outputs of the test 
+will be identified accordingly.\\
+
+How test will be performed: \\
+This manual static test will be completed in Spyder using user feedback to 
+display the previously mentioned output. \\
+
+\end{enumerate}
+
+\subsection{Tests for Nonfunctional Requirements}
+  
+This section will define the tests to ensure diagnosisAIDs fulfill the 
+nonfunctional requirements seen in the SRS document of diagnosisAIDs. The 
+subsections are be separated for different requirements.
+
+\subsubsection{Correctness}
+		
+\paragraph{Testing the Correctness of diagnosisAIDs:}
+The correctness of the software can be defined using the constraints of 
+diagnosisAIDs. Correctness of software is dependent on the satisfaction of the 
+requirements in the SRS. The testing for the correctness of diagnosisAIDs will 
+involve referencing input-verify and output-verify tests from the Tests for 
+Functional Requirements.
+
+\begin{enumerate}
+
+\item{software-correctness\\}
+
+Type: automatic
+					
+Initial State: diagnosisAIDs software run complete
+					
+Input:
+\begin{itemize} % Test case where
+\item Test input 1: input-verify = "success", output-verify = "success"
+\item Test input 2: input-verify = "failure", output-verify = "success"
+\item Test input 3: input-verify = "success", output-verify = "failure"
+\end{itemize}
+
+Output: 
+\begin{itemize}
+\item Test output 1: "software-correctness: $100\%$ correct"
+\item Test output 2: "software-correctness: $50\%$ correct" 
+\item Test output 3: "software-correctness: $50\%$ correct"
+\end{itemize}
+					
+How test will be performed: \\
+The correctness of the diagnosisAIDs will be tested in Spyder using if-then-else 
+loop conditions to display the previously mentioned output. \\
+
+\end{enumerate}
+
+\subsubsection{Reliability}
+\paragraph{Testing the Reliability of diagnosisAIDs:}
+The reliability of the software tests if the product aligns with it's purpose. 
+Reliability of diagnosisAIDs will be examined by comparing the output to several 
+subject profiles from a scientific journal using relative error.
+\begin{enumerate}
+
+\item{software-reliability\\}
+
+Type: automatic
+					
+Initial State: diagnosisAIDs software run complete
+					
+Condition:
+\begin{itemize} % Test case where
+\item $X$ = $(theoretical value - experimental value)$ / $experimental value$
+\end{itemize}
+
+Result: 
+\begin{itemize}
+\item The software is $X\%$ reliable.
+\end{itemize}
+				
+					
+How test will be performed: \\
+The reliability of the diagnosisAIDs will be quantified in Spyder to display the 
+previously mentioned output. \\
+
+\end{enumerate}
+
+\subsubsection{Usability}
+
+\paragraph{Testing the Usability of diagnosisAIDs:}
+
+The usability is highly important in the diagnosisAIDs software as many users 
+will be interacting with the software. Testing the usability will determine if 
+the users have a efficient interaction with the software. The system will be 
+tested against a usability checklist and a usability survey to quantify the 
+versatility of the user interface.
+
+
+\begin{enumerate}
+
+\item{software-usabilitychecklist\\}
+
+Type: manual
+					
+Initial State: diagnosisAIDs software run complete
+					
+Input:
+\begin{itemize} % Test case where
+\item The design of the user interface and checklist.
+\end{itemize}
+
+Result: 
+\begin{itemize}
+\item The software aligns with $X\%$ of the checklist.
+\end{itemize}
+				
+					
+How test will be performed: \\
+The usability of the diagnosisAIDs will be quantified manually by determining 
+the percentage of items on the checklist that the software has.\\
+
+\item{software-usabilitysurvey\\}
+
+Type: manual
+					
+Initial State: diagnosisAIDs software run complete
+					
+Input:
+\begin{itemize} % Test case where
+\item The design of the user interface and survey questions.
+\end{itemize}
+
+Result: 
+\begin{itemize}
+\item A certain item should be discarded.
+\item A certain item should be added.
+\end{itemize}
+				
+					
+How test will be performed: \\
+The usability of the diagnosisAIDs will be quantified manually by determining 
+possible changes from survey answers from the usability survey.\\
+
+\end{enumerate}
+
+\subsubsection{Performance}
+
+\paragraph{Testing the Performance of diagnosisAIDs:}
+
+The adequate time and memory performance is essential for the diagnosisAIDs 
+software. Testing the performance will ensure the software is useful for 
+intended users. 
+
+\begin{enumerate}
+
+\item{software-profiling\\}
+
+Type: automatic
+					
+Initial State: diagnosisAIDs software run complete
+					
+Input:
+\begin{itemize} % Test case where
+\item The code generated by Drasil and cProfile library.
+\end{itemize}
+
+Result: 
+\begin{itemize}
+\item The wall time per function call
+\item The cumulative time for a given function.
+\end{itemize}
+				
+					
+How test will be performed: \\
+The test for deterministic performance will use the cProfile library 
+atuomatically in Spyder to identify lines of the code that can possibly be 
+optimized. The system will be profiled using ProfileC to determine the wall time 
+per function call and cumulative time spent on a given function.\\
+
+
+\subsection{Traceability Between Test Cases and Requirements}
+
+The purpose of the traceability matrices is to provide easy references on what
+has to be additionally modified if a certain component is changed.  Every time a
+component is changed, the items in the column of that component that are marked
+with an ``X'' may have to be modified as well.  Table~\ref{Table:R_trace} shows 
+which test cases are supporting which requirements.
+
+
+\begin{landscape}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+	& R-Inputs & R-Constraints & R-AIDsdiagnosis & R-VerifyOutput 
+& R-Output\\
+\hline
+\tinref{Tinput_1}        	&x & & & &  \\ 
+\hline
+\tinref{Tinput_2}			&x & & & &   \\ 
+\hline
+\tinref{Tinput_3}        	&x & & & &  \\ 
+\hline
+\tinref{Tinput_4}			&x & & & &   \\ 
+\hline
+\tinref{Tinput_5}        	&x & & & &  \\ 
+\hline
+\tinref{Tinput_6}			&x & & & &   \\ 
+\hline
+\tinref{Tinput_7}        	& &x & & &  \\ 
+\hline
+\tinref{Tinput_8}			& &x & & &   \\ 
+\hline
+\tinref{Tinput_9}        	& &x & & &  \\ 
+\hline
+\tinref{Tinput_10}			& &x & & &   \\ 
+\hline
+\tinref{Tinput_11}        	& &x & & &  \\ 
+\hline
+\tinref{Tinput_12}			& & &x & &   \\ 
+\hline
+\tinref{Tinput_13}        	& & &x & &  \\ 
+\hline
+\tinref{Tinput_14}			& & &x & &   \\ 
+\hline
+\tinref{Tinput_15}        	& & &x & &   \\  
+\hline
+\tinref{Tinput_16}			& & &x &x & \\ 
+\hline
+\tinref{Tinput_17}        	& & &x &x &   \\ 
+\hline
+\tinref{Tinput_18}			& & &x &x &   \\  
+\hline
+\tinref{Tinput_19}        	& & &x &x &   \\  
+\hline
+\tinref{Tinput_20}			& & &x &x &   \\  
+\hline
+\tinref{Tinput_21}        	& & & & &x  \\ 
+\hline
+\tinref{Tinput_22}			& & & & &x   \\ 
+\hline
+\tinref{Tinput_23}        	& & & & &x  \\ 
+\hline
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Requirements and 
+test cases}
+\label{Table:R_trace}
+\end{table}
+\end{landscape}
+
+\bibliographystyle{plainnat}
+
+\bibliography{referencesv}
+~\newpage
+
+\newpage
+
+\section{Appendix}
+
+The appendix presents the usability checklist and survey questions mentioned in 
+section.
+
+\subsection{Usability Checklist}
+
+\wss{This is a section that would be appropriate for some projects.}
+
+\title{System Usability Checklist}
+
+
+\begin{itemize}
+  
+\item Grammar, spelling, presentation
+  \begin{itemize}
+  \item No spelling mistakes 
+  \item No grammar mistakes
+  \item All hyperlinks work
+  \item Symbolic names are used for quantities, rather than literal values
+  \end{itemize}
+
+\item Organization
+  \begin{itemize}
+  \item Page title for every page
+  \item Step of process identified
+  \item Name of step of process
+  \end{itemize}
+  
+\item User Interaction
+  \begin{itemize}
+  \item Field names 
+  \item Obvious field location 
+  \item Important information highlighted
+  \item Help or Suggestion for each page
+  \end{itemize}
+\end{itemize}
+
+
+\subsection{Usability Survey Questions}
+
+This is a section states the usability questions to ask for the manual test for 
+the usability requirement.
+
+\begin{enumerate}
+  \item What do you like most about the interface?
+  \item What would you like to change about the interface?
+  \item Did you face any challenge while using the site? 
+  \item Were the buttons and fields easy to find and understand?
+  \item On a scale of 1-10, how easy was it to navigate through the interface? 
+  \item Did you feel that the software took too long to load the website?
+  \item Did you feel that the software took too long to fetch your details on 
+our website?
+  \item Do you have any suggestions or comments?
+
+\end{enumerate}
+
+
+\end{document}
+
+
+
+
+
+
+
