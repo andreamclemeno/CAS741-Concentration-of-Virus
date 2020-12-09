@@ -1,21 +1,26 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 
 \usepackage{tabularx}
 \usepackage{booktabs}
 \usepackage{hardwrap}
 
-\title{CAS 741: Rate of concentration of Human immunodeficiency virus (HIV-1)}
-
-\author{Andrea Clemeno  400018541}
-
-\date{September 25 2020}
-
-\input{../Comments}
+\usepackage[round]{natbib}
 
 \begin{document}
 
+
+\title{CAS 741: Investigation of Human 
+immunodeficiency virus (HIV-1) viral load}
+
+\author{Andrea Clemeno  400018541}
+
+\date{\today}
 \maketitle
-\newpage
+
+~\newpage
+
+\input{../Comments}
+
 \section{Revision History}
 
 \begin{table}[hp]
@@ -27,6 +32,7 @@
 Sept 21 & Andrea Clemeno & First Draft of Problem Statement\\
 Sept 25 & Andrea Clemeno & Second Draft of Problem Statement\\
 Sept 30 & Andrea Clemeno & Third Draft of Problem Statement\\
+Dec 9 & Andrea Clemeno & Final Document of Problem Statement\\
 
 
 \bottomrule
@@ -47,24 +53,15 @@ body as it may kill or modify cells. The human body’s immune system will work 
 counteract this attack by recognizing and implementing several methods of 
 defense. 
 
-The common cold, influenza, acquired immunodeficiency syndrome (AIDs) and the 
-novel coronavirus (COVID-19) are infectious diseases transmitted among humans. 
-The culprit behind these contagions are submicroscopic parasites that infect 
-cells called viruses. Once a virus comes into contact with a host cell, the 
-infected cell will begin to rapidly reproduce the genetic material of the virus 
-rather than it’s own products. This phenomena causes devastating damage to the 
-body as it may kill or modify cells. The human body’s immune system will work to 
-counteract this attack by recognizing and implementing several methods of 
-defense. 
-
 
 Different viruses cause different responses from the human body. The human 
 immunodeficiency virus 1 (HIV-1) is the most common type of HIV virus that 
 attacks a type of white blood cell through direct contact with infected bodily 
-fluids. These white blood cells (CD4 cells) are instrumental in fighting off 
+fluids. These white blood cells (Helper T cells) are instrumental in fighting 
+off 
 diseases. The body’s defences are weakened by the infection causing heightened 
 susceptibility to other diseases. The HIV-1 virus causes AIDs, a disease which 
-affects 38 million people worldwide. 
+affects 38 million people worldwide \citep{who}.
 
 Currently, there is no formative cure for AIDs; patients are treated with 
 antiretroviral therapy to minimize the transmission of AIDs and the contraction 
@@ -72,29 +69,39 @@ of other infections. Analyzing the interaction between HIV-1 and the human body
 is essential in understanding and treating AIDs. 
 
 \begin{center}
-$\frac{dV}{dt}= P - cV$
+$N_t$ = $N_{o} e^{-k t}$
 
-Equation 1: The differential equation representing the concentration of the 
-virus over time. 
+Equation 1: The closed-form equation representing the concentration of a virus 
+over time. 
 \end{center}
 
 \begin{itemize}
-	\item $\frac{dV}{dt}$: The change in virus concentration over time. 
-	\item P: A function representing the rate of virus production. 
-	\item c: A constant called the clearance rate constant.
-	\item V: The initial virus concentration.
+
+  \item $N_{o}$ is the initial amount that will undergo an exponential 
+decrease. $N_{o}$ is equivalent to $N(t= 0)$.
+  \item $N_t$ is the viral load at time t.
+  \item $k$ is the clearing constant.
+  \item  $t$ is the time.
+
 \end{itemize}
 
 This project will investigate the immunological response of the human body to 
-HIV-1 through the use of a first-order differential equation representing the 
-concentration of the virus over time as seen in Equation  1. This simple dynamic 
-model is based on the production and clearance rates of the virus for a specific 
-tissue.  Exploring the changing viral concentration will help determine the 
-stage of the condition and optimal treatment. In addition, modelling the virus 
+HIV-1 through the use of the closed-form equation representing the concentration 
+of a virus over time seen in Equation  1. This simple dynamic 
+model is based on the exponential decline of the concentration of the virus. 
+Exploring the changing viral concentration will help determine the 
+stage of the condition. In addition, modelling the virus 
 growth may lead to developments of a cure or better treatment options for AIDs. 
 Moreover, the Drasil framework will be implemented to generate different project 
 artifacts throughout the investigation. The Drasil method will be used to 
 improve different aspects of software quality, including maintainability, 
-verifiability, and traceability.
+verifiability, and traceability \citep{Drasilcreate}.
+
+\newpage
+
+\bibliographystyle{plainnat}
+\bibliography{references.bib}
+
 
 \end{document}
+
