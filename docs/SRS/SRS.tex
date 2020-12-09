@@ -120,8 +120,8 @@ This section records information for easy reference.
 
 \subsection{Table of Units}
 
-Throughout this document SI (Syst\`{e}me International d'Unit\'{e}s) is employed
-as the unit system. For each unit, the symbol is given followed by a
+Throughout this document employs the following units. For each unit, the symbol 
+is given followed by a
 description of the unit and the name.
 
 \renewcommand{\arraystretch}{1.2}
@@ -131,9 +131,9 @@ description of the unit and the name.
     \toprule		
     \textbf{symbol} & \textbf{unit} & \textbf{name}\\
     \midrule 
-    \si{\day} & time & day\\
+    d & time & day\\
     mL & volume	& millilitre\\
-    \si{\mole} & amount of substance & mole\\
+    mole & amount of substance & mole\\
     \bottomrule
   \end{tabular}
   \end{center}
@@ -358,7 +358,8 @@ practitioners (NP), or a physician assistant (PA). \citep{cdc}
 The system, \progname{}, is limited to only instances where viral load 
 is eliminating. If 
 the viral load is increasing, the immune system has not recognized the intruders 
-and a estimation of immune system efficiency using the elimination rate cannot be determined. More specifically, the 
+and a estimation of immune system efficiency using the elimination rate cannot 
+be determined. More specifically, the 
 initial viral load must be greater than the viral load on the consecutive test.
 
 \section{Specific System Description}
@@ -460,7 +461,8 @@ following elements:
 
 \subsubsection{Goal Statements}
 
-\noindent Given two HIV-1 viral load test datum, time duration between the tests and the chosen prediction period, the goal 
+\noindent Given two HIV-1 viral load test datum, time duration between the tests 
+and the chosen prediction period, the goal 
 statements are:
 
 \begin{itemize}
@@ -507,11 +509,13 @@ rate (Ref By: \lcref{LC_more_outputs}).
   
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{const-volume}:]
 const-volume: The dimensions of the location associated with the 
-infection remains constant.(Ref By:\aref{const-conditions}, \ucref{ULC_constant-conditions})
+infection remains constant.(Ref By:\aref{const-conditions}, 
+\ucref{ULC_constant-conditions})
   
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{const-conditions}:]
 const-conditions: Temperature in the infection location remains constant. 
-Higher temperatures boost virus replication and viral load \citep{10.1371/journal.ppat.1002792}. (Ref By:  
+Higher temperatures boost virus replication and viral load 
+\citep{10.1371/journal.ppat.1002792}. (Ref By:  
 \ucref{ULC_constant-conditions})
 
   
@@ -687,7 +691,8 @@ Section~\ref{sec_datadef} to replace the abstract symbols in the models
 identified in Sections~\ref{sec_theoretical} and~\ref{sec_gendef}.
 
 The goals GS\ref{G_determine-elimination-rate}: determine-elimination-rate and 
-GS\ref{G_predict-VL-30}: predict-VL-30 are met by \iref{VLelimination}and \iref{VLat30}.
+GS\ref{G_predict-VL-30}: predict-VL-30 are met by \iref{VLelimination}and 
+\iref{VLat30}.
 
 
 
@@ -741,7 +746,8 @@ viralLoad} with respect to time in \hyperref[GD_vLoadt]{GD: vLoadt}, we have:
 \begin{displaymath}
 {N_{\text{t}}}={N_{\text{o}}} e^{-k {t_{\text{t}}}}
 \end{displaymath}
-Where ${N_{\text{t}}}$ denotes the viral load at time $t_{\text{t}}$, ${N_{\text{o}}}$ 
+Where ${N_{\text{t}}}$ denotes the viral load at time $t_{\text{t}}$, 
+${N_{\text{o}}}$ 
 denotes the initial viral load and $k$ denotes the elimination constant. When 
 isolating for the elimination constant,  we have:
 
@@ -863,7 +869,9 @@ uncertainty quantification exercise.
 \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
 
 \noindent
-A correct solution must exhibit an elimination constant greater than 0 and a predicted viral load less than the initial and secondary viral load, $N_o$ and $N_t$, respectively. 
+A correct solution must exhibit an elimination constant greater than 0 and a 
+predicted viral load less than the initial and secondary viral load, $N_o$ and 
+$N_t$, respectively. 
 Table~\ref{TblOutputVar} shows the data constraints for the output variables. 
 
 
@@ -904,7 +912,8 @@ bounds and in accordance with the data constraints. If any inputs are out of
 bounds, an error message is displayed in subsection \ref{sec_DataConstraints}.
     
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:] 
-Calculate-Values: Software calculates the initial elimination rate of HIV and the predicted viral 
+Calculate-Values: Software calculates the initial elimination rate of HIV and 
+the predicted viral 
 load from \iref{VLelimination} and 
 \iref{VLat30}.
 
@@ -914,7 +923,9 @@ constraints from subsection \ref{sec_CorrectSolution}.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Output}:] 
 Output-Values: Output related requirements including the elimination rate and 
-predicted viral load to satisfy the goals of \progname{}: determine-elimination-rate (GS\ref{G_determine-elimination-rate}) and determine-elimination-rate (GS\ref{G_predict-VL-30}).
+predicted viral load to satisfy the goals of \progname{}: 
+determine-elimination-rate (GS\ref{G_determine-elimination-rate}) and 
+determine-elimination-rate (GS\ref{G_predict-VL-30}).
 
 \end{itemize}
 
@@ -947,7 +958,9 @@ required. \citep{Drasilcreate}
 Maintainablility: The traceability between requirements, assumptions, 
 theoretical models, general 
 definitions, data definitions, instance models, likely changes, unlikely 
-changes, and modules is completely recorded in traceability matrices throughout the documentation of  \progname{} to measure maintainability. The traceability will be measured by 
+changes, and modules is completely recorded in traceability matrices throughout 
+the documentation of  \progname{} to measure maintainability. The traceability 
+will be measured by 
 ensuring relationship from inputs to instance model is recorded and 
 identifiable. 
 
@@ -1100,4 +1113,5 @@ changed.
 
 
 \end{document}
+
 
