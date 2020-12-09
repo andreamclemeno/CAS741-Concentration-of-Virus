@@ -80,6 +80,8 @@
 \newcommand{\ltheucnum}{UC\thelcnum}
 \newcommand{\ucref}[1]{UC\ref{#1}}
 
+\usepackage{fullpage}
+
 \begin{document}
 
 \title{Software Requirements Specification for \progname: Medical Prediction 
@@ -103,8 +105,9 @@ Tool for Acquired immunodeficiency syndrome (AIDS)}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 October 10 2020 & 1.0 & Initial Draft of SRS\\
-December 3 & 1.1 & Revised Draft of SRS\\
-December 8 & 1.2 & 2nd Revised Draft of SRS\\
+December 3 2020 & 1.1 & Revised Draft of SRS\\
+December 8 2020 & 1.2 & 2nd Revised Draft of SRS\\
+December 9 2020 & 2.0 & Final Draft of SRS\\
 \bottomrule
 \end{tabularx}
 
@@ -446,7 +449,7 @@ following elements:
  \begin{center}
  %\rotatebox{-90}
  {
-  \includegraphics[width=0.5\textwidth]{physicalsys.jpg}
+  \includegraphics[width=0.5\textwidth]{physicalsys.JPG}
  }
  \caption{The Physical System}\citep{wikifig}
 
@@ -1083,7 +1086,9 @@ changed.
 \section{References}
 
 \bibliographystyle{plainnat}
-\bibliography{references.bib}
+\bibliography {../../refs/References}
+
+%\bibliography{references.bib}
 
 %\newpage
 
