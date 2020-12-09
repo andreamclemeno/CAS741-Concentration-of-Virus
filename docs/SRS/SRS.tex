@@ -24,13 +24,14 @@
 \hypersetup{
     bookmarks=true,         % show bookmarks bar?
       colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    linkcolor=red,          % color of internal links (change box color with 
+%linkbordercolor)
     citecolor=green,        % color of links to bibliography
     filecolor=magenta,      % color of file links
     urlcolor=cyan           % color of external links
 }
 
-\input{../Comments_new}
+\input{../Comments}
 \input{../Common}
 
 % For easy change of table widths
@@ -44,7 +45,7 @@
 \newcommand{\colGwidth}{0.5\textwidth}
 \newcommand{\colHwidth}{0.28\textwidth}
 
-% Used so that cross-references have a meaningful prefix
+% Used so that cross-references have a meaningful prefix 
 \newcounter{defnum} %Definition Number
 \newcommand{\dthedefnum}{GD\thedefnum}
 \newcommand{\dref}[1]{GD\ref{#1}}
@@ -78,20 +79,15 @@
 \newcounter{ucnum} %Likely change number
 \newcommand{\ltheucnum}{UC\thelcnum}
 \newcommand{\ucref}[1]{UC\ref{#1}}
-\\
-
-\usepackage{fullpage}
-
-	
 
 \begin{document}
 
-
-\title{Software Requirements Specification for diagnosis-AIDs\progname: Medical 
-Diagnosis Prediction Tool for Acquired immunodeficiency syndrome (AIDS)} 
+\title{Software Requirements Specification for \progname: Medical Prediction 
+Tool for Acquired immunodeficiency syndrome (AIDS)} 
 \author{Andrea Clemeno}
 \date{\today}
-\maketitle	
+	
+\maketitle
 
 ~\newpage
 
@@ -107,8 +103,8 @@ Diagnosis Prediction Tool for Acquired immunodeficiency syndrome (AIDS)}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 October 10 2020 & 1.0 & Initial Draft of SRS\\
-October 24 2020 & 2.0 & Second Draft of SRS\\
-%Date 2 & 1.1 & Notes\\
+December 3 & 1.1 & Revised Draft of SRS\\
+December 8 & 1.2 & 2nd Revised Draft of SRS\\
 \bottomrule
 \end{tabularx}
 
@@ -121,21 +117,19 @@ This section records information for easy reference.
 \subsection{Table of Units}
 
 Throughout this document SI (Syst\`{e}me International d'Unit\'{e}s) is employed
-as the unit system.  In addition to the basic units, several derived units are
-used as described below.  For each unit, the symbol is given followed by a
-description of the unit and the SI name.
+as the unit system. For each unit, the symbol is given followed by a
+description of the unit and the name.
 
 \renewcommand{\arraystretch}{1.2}
-\begin{table}[ht]
+\begin{table}[h!]
 \begin{center}
  \noindent \begin{tabular}{l l l}
     \toprule		
-    \textbf{symbol} & \textbf{unit} & \textbf{SI}\\
+    \textbf{symbol} & \textbf{unit} & \textbf{name}\\
     \midrule 
-    \si{\metre} & length & metre\\
-    \si{\kilogram} & mass	& kilogram\\
-    \si{\second} & time & second\\
-    \si{\celsius} & temperature & centigrade\\
+    \si{\day} & time & day\\
+    mL & volume	& millilitre\\
+    \si{\mole} & amount of substance & mole\\
     \bottomrule
   \end{tabular}
   \end{center}
@@ -149,45 +143,39 @@ description of the unit and the SI name.
 The table that follows summarizes the symbols used in this document along with
 their units. The symbols are listed in alphabetical order.
 
-\begin{table}[ht]
+\begin{table}[H]
 \renewcommand{\arraystretch}{1.2}
 %\noindent \begin{tabularx}{1.0\textwidth}{l l X}
 \noindent \begin{longtable*}{l l p{12cm}} \toprule
 \textbf{symbol} & \textbf{unit} & \textbf{description}\\
 \midrule 
-$A_1$ & \si[per-mode=symbol] {$1 / 10^{-3}m^3}$} & initial amount of substance
+$k$ & $d^{-1}$ & Elimination Constant
 \\
-$A_2$ & \si[per-mode=symbol]{$1 / 10^{-3}m^3}$} & amount of substance at second 
-instance 
+$N$ & \si[per-mode=symbol]{\dfrac{\mol}{\mL}} & Viral Load
 \\ 
-$isClearing$ & - & requirement of clearance rate of change
+$N_{o}$ & \si[per-mode=symbol]{\dfrac{\mol}{\mL}} & Initial Viral Load
+\\ 
+$N_{p}$ & \si[per-mode=symbol]{\dfrac{\mol}{\mL}} & Predicted Viral Load at time 
+$t_{p}$
+\\ 
+$N_{t}$ & \si[per-mode=symbol]{\dfrac{\mol}{\mL}} & Viral Load at time $t_{t}$
+\\ 
+$n$ & \si[per-mode=symbol]{\mol} & Number of virions
+\\ 
+$r$ & \si[per-mode=symbol] {\dfrac{\mol}{mL*d}} & Rate of change of the viral 
+load
 \\
-$N_0$ & \si[per-mode=symbol] {\mol} & initial amount of substance
+$t$ & \si[per-mode=symbol] {\day} & Time
 \\
-$N_t$ & \si[per-mode=symbol] {\mol} & amount of substance at time, t  
+
+$t_{p}$ & \si[per-mode=symbol] {\second} & Time duration of chosen prediction 
+period 
 \\
-$rate_D$ & \si[per-mode=symbol] {{$\dfrac{1 / 10^{-3}m^3}{s}$}} & the rate of 
-clearance
+$t_{t}$ & \si[per-mode=symbol] {\second} & Time duration between initial and  
+secondary viral load test
 \\
-$t$ & \si[per-mode=symbol] {\second} & time
+$V$ & \si[per-mode=symbol] {\mL} & Volume
 \\
-$t_1$ & \si[per-mode=symbol] {\second} & time at instance 1
-\\
-$t_2$ & \si[per-mode=symbol] {\second} & time at instance 2
-\\
-$VL$ & \si[per-mode=symbol] {$\dfrac{virions}{10^{-3}m^3}$} & Viral Load
-\\
-$VL_n$ & \si[per-mode=symbol] {$\dfrac{virions}{10^{-3}m^3}$} & Viral Load at 
-instance n
-\\
-$VL_1$ & \si[per-mode=symbol] {$\dfrac{virions}{10^{-3}m^3}$} & Viral Load at 
-instance 1
-\\
-$VL_2$ & \si[per-mode=symbol] {$\dfrac{virions}{10^{-3}m^3}$} & Viral Load at 
-instance 2
-&\\
-$\lambda$ & \si[per-mode=symbol] {{$\dfrac{ virions / 10^{-3}m^3}{s}$}} & the 
-rate of clearance
 &\\
 \bottomrule
 
@@ -195,13 +183,14 @@ rate of clearance
 \caption{Table of Symbols}
 \end{table}
 
+\newpage
+
 \subsection{Abbreviations and Acronyms}
 
 The table that follows summarizes the symbols used in this document that allude 
 to different sections of the Software Requirements Specification. The symbols 
 are listed in alphabetical order.
-
-\begin{table}[ht]
+\begin{table}[h!]
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{l l} 
@@ -217,8 +206,8 @@ are listed in alphabetical order.
   PS & Physical System Description\\
   R & Requirement\\
   SRS & Software Requirements Specification\\
-  diagnosis-AIDS & Medical Diagnosis Prediction Tool \\
-   & for Acquired immunodeficiency syndrome (AIDS)\\
+  \progname{} & Medical Diagnosis Prediction Tool\\
+  & for Acquired immunodeficiency syndrome (AIDS)\\
   T & Theoretical Model\\
   ULC & Unlikely Change\\
   \bottomrule
@@ -227,7 +216,6 @@ are listed in alphabetical order.
 \caption{Table of Abbreviations and Acronyms}
 
 \end{table}
-
 
 \newpage
 
@@ -238,18 +226,23 @@ are listed in alphabetical order.
 
 Human immunodeficiency virus 1 (HIV -1) is the most common type of HIV virus 
 that attacks cells of the immune system needed to fight off diseases. After 
-being infected with the HIV-1 virus, the patient's state worsens and the 
+being infected with the HIV-1 virus, the state of a patient's health worsens and 
+the 
 condition can be classified as Acquired immunodeficiency syndrome (AIDs), a 
 disease which affects 38 million people worldwide \citep{who}. Although there is 
-no cure for AIDs, antiretroviral therapy helps control a patient's condition. 
-Having a program that assesses the efficient of a patient's immune system and 
-predict their disease progression will be useful in creating a treatment plan. 
-The program documented here is called diagnosis-AIDS.
+no cure for 
+AIDs, antiretroviral 
+therapy helps control a patient's condition. Having a program that assesses the 
+efficient of a patient's immune system and predict their viral load progression 
+will be 
+useful in creating a treatment plan. The program documented here is called 
+Diagnose.
 
 The following section provides an overview of the Software Requirements 
-Specification (SRS) for diagnosis-AIDS. This section explains the purpose of 
+Specification (SRS) for Diagnose. This section explains the purpose of 
 this document, the scope of the requirements, the characteristics of the 
 intended reader, and the organization of the document.
+
 
 
 \subsection{Purpose of Document}
@@ -261,28 +254,36 @@ full understanding of the system. The following SRS document will remain
 abstract exploring what is being solved rather than how it will be solved.
 
 This initial document is the start of a series of documents that will 
-outline the development of the software tool, diagnosis-AIDS. The SRS will 
+outline the development of the software tool, \progname{}. The SRS will 
 describe the system context and constraints, the specific problem definition and 
 solution characteristics, requirements and likely and unlikely changes for the 
 development of the tool.
 
+
 \subsection{Scope of Requirements} 
 
-The scope of the requirements includes the analysis of HIV-1 concentration 
-over time with constant clearance rate.
+The scope of the requirements includes the analysis of the HIV-1 viral load 
+concentration 
+over time after the viremia peak of the initial infection without the influence 
+of external factors that can affect the efficiency of the immune system.
+
+
 
 \subsection{Characteristics of Intended Reader} \label{sec_IntendedReader}
 
 Reviewers of this documentation should have a basic understanding of virus 
-dynamics and high school calculus. The users of diagnosis-AIDS must have a 
+dynamics and high school differential calculus. The users of \progname{} must 
+have a 
 higher level of expertise, as explained in Section: User Characteristics
-(Section~\ref{SecUserCharacteristics}).
+(Section~\ref{SecUserCharacteristics}). 
+
+
 
 \subsection{Organization of Document}
 
 The organization of the document will present the system's goals, theories, 
 definitions, and assumptions. The template for an SRS for scientific computing 
-will be followed. To approach diagnosis-AIDS from a higher level to a more 
+will be followed. To approach \progname{} from a higher level to a more 
 elaborate level, readers can begin with reading the system's goal statements. 
 Subsequently, the theoretical models will elaborate on the goal statements. 
 Lastly, 
@@ -292,20 +293,32 @@ models of the system.
 Oppositely, readers can read from the instance models to the goal statements for 
 a more specific to general understanding.
 
+
+
+
 \section{General System Description}
 
 This section provides general information about the system. It identifies 
-the interfaces between the system and its environment, describes the user characteristics, and lists the system constraints.
+the interfaces
+between the system and its environment, describes the user characteristics, and 
+lists the
+system constraints.
+
 
 \subsection{System Context}
 
 The flow chart in (Figure~\ref{Fig_SystemContext}) shows the system 
-context. The circles represent a user that interacts with the software. The rectangle represents the software system (diagnosis-AIDS). The arrows display the input data from the user and the output data that is useful for the user. The interaction presented will be facilitated using an application programming interface (API).
+context. The circles 
+represent a user that interacts with the software. The rectangle represents the 
+software system (\progname{}). The arrows display the input data from the 
+user 
+and the output data that is useful for the user. The interaction presented will 
+be facilitated using an application programming interface (API).
 
 
 \begin{figure}[ht]
 \begin{center}
- \includegraphics[width=0.6\textwidth]{systemcontext.jpg}
+ \includegraphics[width=1\textwidth]{systemcontext.jpg}
 \caption{System Context}
 \label{Fig_SystemContext} 
 \end{center}
@@ -314,30 +327,35 @@ context. The circles represent a user that interacts with the software. The rect
 \begin{itemize}
 \item User Responsibilities:
 \begin{itemize}
-\item Provide viral load data for two consecutive days.
+\item Provide viral load data for patient's initial and secondary viral load 
+tests, time duration between the tests and the time duration between the initial 
+test and the chosen prediction date.
 \item Ensure required software assumptions (Section~\ref{sec_assumpt}) are 
 appropriate for any particular problem the software addresses.
 
 \end{itemize}
-\item Program (diagnosis-AIDs) Responsibilities:
+\item \progname{} Responsibilities:
 \begin{itemize}
 \item Assess the input data and determine if the required physical and software 
 constraints (Section~\ref{sec_DataConstraints}) are met.
-\item Calculate predictions of 30 day viral load concentration.
+\item Calculate the elimination rate of the virus and the predicted viral load 
+after the chosen prediction period.
 \end{itemize}
 \end{itemize}
-
 
 \subsection{User Characteristics} \label{SecUserCharacteristics}
-
-The users of diagnosis-AIDS should be HIV healthcare providers including 
+The users of \progname{} should be HIV healthcare providers including 
 doctors of medicine (MD) or doctors of osteopathic medicine (DO), nurse 
-practitioners (NP), or a physician assistant (PA). \citep{cdc}}
+practitioners (NP), or a physician assistant (PA). \citep{cdc}
 
-\subsection{System Constraints}
 
-The system, diagnosis-AIDs, is limited to only instances where viral load 
-is clearing. If the viral load is increasing, the immune system has not recognized the intruders and a estimation of immune efficiency cannot be found. More specifically, the initial viral load must be greater than the viral load on the consecutive day.
+\subsection{System Constraints} \label{Sec_constraints}
+
+The system, \progname{}, is limited to only instances where viral load 
+is eliminating. If 
+the viral load is increasing, the immune system has not recognized the intruders 
+and a estimation of immune system efficiency using the elimination rate cannot be determined. More specifically, the 
+initial viral load must be greater than the viral load on the consecutive test.
 
 \section{Specific System Description}
 
@@ -346,55 +364,69 @@ high-level view of the problem to be solved.  This is followed by the solution
 characteristics specification, which presents the assumptions, theories, 
 definitions and finally the instance models.
 
+
 \subsection{Problem Description} \label{Sec_pd}
 
 AIDs is one of the most serious health challenges in our global community. 
 Many individuals infected with HIV visit healthcare facilities with hopes to 
-find solutions to manage their conditions. A system ensuring accurate and quick characterization of a patient’s condition can prove useful in predicting the progression of viruses like HIV, and the diagnosis of diseases like AIDs. Using this system, important decisions reached by healthcare professionals will be more data-driven and quick.
+find solutions to manage 
+their conditions. A system for the characterization of a 
+patient’s condition can prove useful in predicting the progression of viruses 
+like HIV, and the diagnosis of diseases like AIDs. Using this system, important 
+decisions reached by healthcare professionals will be more data-driven and 
+quick.
 
-This system could be used to assess risk before substantial immune destruction 
-has occurred. The system is intended to predict the viral load at 30 days, 
-and predict the patient’s progression to AIDs.
+\progname{} is intended to model the viral load over time for the HIV-1 Virus 
+responsible for AIDs. This system could be used to assess risk before 
+substantial immune destruction 
+has occurred.
+
+
 
 \subsubsection{Terminology and Definitions}
+
 
 This subsection provides a list of terms that are used in the subsequent
 sections and their meaning, with the purpose of reducing ambiguity and making it
 easier to correctly understand the requirements:
 
 \begin{itemize}
+
 \item Virus: Submicroscopic parasites that infect cells. 
-\item Virion: A single entire virus particle.
-\item Infected cells: Once a virus comes into contact with a host cell, the 
-infected cell will begin to undergo viral replication.
-\item Viral Replication: Process where infected cells rapidly reproduce the 
-genetic material of the virus rather than it’s own 
-products\citep{BURRELL201739}.
-\item Helper T cells: The cells of the immune system that help activate T cells.
-\item T cells: The cells of the immune system that kill infected target cells. A 
-common type of T-cell are CD4+ cells.
-\citep{william_2018}
-\item HIV Virus: HIV infects cells in the immune system.
+\item Viral load: The concentration of HIV virus at a point in time.
+\item Replication: The process where infected cells rapidly reproduce genetic 
+material of the virus rather than it's normal process of reproducing itself. 
+\citep{BURRELL201739}
+\item Productivity: Cells can be productive and non-productive. Productive means 
+that infection occurs. The HIV-1 Virus needs to interact with a cell to be 
+productive and replicate. \citep{BURRELL201739}
+\item Infected cells: Cells that interact with the virus replicate into cells 
+altered by the virus.
+\item Helper T cells: Cells of the immune system that neutralize infected cells. 
+\citep{william_2018}.
 \item Immune Response: The defensive reaction of the human body against the 
 harmful substances like HIV.
-\item Viral load:  The amount of virus in your blood.
-\item Clearing: Physical quantity undergoing a constant decline.
-\item Clearance Rate: Rate of decline of a physical quantity undergoing a constant decline.
-\item AIDs: Acquired Immunodeficiency Syndrome is where the Viral Load increases 
-to an extent where the  CD4+ cell count decreases to below 200 
-$cells/10^{-3}m^3$.\citep{hiv.gov}
-\item Diagnosis: The medical decision determining a patient's condition reached 
-by a healthcare professional.
-\item Progression: The development towards a more advanced stage.
-\item Progression Speed: The rate of developing to a more advanced stage. For 
-example, slow, moderate and fast progression.
+\item Elimination: Physical quantity undergoing a decline in amount.
+\item Viremia peak: The peak of viral load after the virus has entered the blood 
+stream. There is a trend of elimination of viral load due to the body's immune 
+response. \citep{little1999}
+\item AIDs: Acquired Immunodeficiency Syndrome develops from an increase in HIV 
+viral load to the extent where T cell count decreases to under 200 
+$mol/mL$.\citep{hiv.gov}
+\item Diagnosis: The determination of a patient's condition reached by a 
+healthcare professional.
+\item Progression: The development towards a more advanced 
+stage.
+
+
 \end{itemize}
 
 \subsubsection{Physical System Description} \label{sec_phySystDescrip}
 
-The physical system of diagnosis-AIDs, as seen in 
+The physical system of \progname{}, as seen in 
 (Figure~\ref{Fig_PhysicalSystem}), occurs within the human body and includes the 
 following elements:
+
 
 \begin{itemize}
 
@@ -403,18 +435,20 @@ following elements:
 \item[PS2:] An infected cell with the virus.
 
 \item[PS3:] The helper T cells.
-
+ 
 \item[PS4:] The human body. 
+
+\item[PS5:] The skin barrier of the human body. 
 
 \end{itemize}
 
- \begin{figure}[h!]
+ \begin{figure}[H]
  \begin{center}
  %\rotatebox{-90}
  {
   \includegraphics[width=0.5\textwidth]{physicalsys.jpg}
  }
- \caption{ The Physical System}\citep{wikifig}
+ \caption{The Physical System}\citep{wikifig}
 
  \label{Fig_PhysicalSystem}
  \end{center}
@@ -422,35 +456,42 @@ following elements:
 
 \subsubsection{Goal Statements}
 
-\noindent Given two HIV-1 viral load datum taken on consecutive days, the goal 
+\noindent Given two HIV-1 viral load test datum, time duration between the tests and the chosen prediction period, the goal 
 statements are:
 
 \begin{itemize}
 
-\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_determine-clearing
--rate}:] 
-\plt{determine-clearing-rate: Determine the rate of clearance of the HIV virus due 
-to immune response.}
+\item[GS\refstepcounter{goalnum}\thegoalnum 
+\label{G_determine-elimination-rate}:] 
+determine-elimination-rate: Determine the rate of elimination of the HIV virus 
+due 
+to immune response.
 
 \item[GS\refstepcounter{goalnum}\thegoalnum \label{G_predict-VL-30}:] 
-\plt{predict-VL-30: Predict Viral Load at 30 days.}
+predict-VL: Predict Viral Load after chosen prediction period.
 
 \end{itemize}
 
+\newpage
+
 \subsection{Solution Characteristics Specification}
 
-The instance models that govern diagnosis-AIDs are presented in
+
+The instance models that govern \progname{} are presented in
 Subsection~\ref{sec_instance}.  The information to understand the meaning of the
 instance models and their derivation is also presented in Assumptions, 
 Theoretical Models, General Definitions and Data Definitions, so that the 
-instance models can be verified.
+instance
+models can be verified.
 
 \subsubsection{Assumptions} \label{sec_assumpt}
 
+
 This section describes the theoretical assumptions that the system will be 
 based on. The theoretical models will be easier to understand by explaining 
-these assumptions. The numbers given in the square brackets refer to the theoretical model [T], general definition [GD], data definition [DD], instance model [IM], or likely change [LC], in which the respective assumption is used.
+these assumptions.
 
+  
 \begin{itemize}
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{initial-inf}:]
@@ -458,44 +499,45 @@ initial-inf: Initial infection of a HIV patient.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{const-growth}:]
 const-growth: The virions will invade uninfected cells at a constant 
-rate (Ref By: \lcref{LC_artherapy}).
+rate (Ref By: \lcref{LC_more_outputs}).
   
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{const-volume}:]
 const-volume: The dimensions of the location associated with the 
-infection remain constant.(Ref By: \ucref{ULC_constant-conditions})
+infection remains constant.(Ref By:\aref{const-conditions}, \ucref{ULC_constant-conditions})
   
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{const-conditions}:]
 const-conditions: Temperature in the infection location remains constant. 
-Higher temperatures boost replication. (Ref By: \aref{const-volume}, 
-\ucref{ULC_constant-conditions})\citep{10.1371/journal.ppat.1002792}
+Higher temperatures boost virus replication and viral load \citep{10.1371/journal.ppat.1002792}. (Ref By:  
+\ucref{ULC_constant-conditions})
 
+  
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{all-productive}:]
-all-productive: All infected cells are productively infected cells 
-meaning there are no infected cells that do not affect other cells. (Ref By: 
+all-productive: All viruses within the volume have productively infected cells. 
+(Ref By: 
 \ucref{ULC_constant-conditions})
   
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{always-clear}:]
-always-clear: Although slight fluctuations in viral load do occur even 
-after the peak, it is assumed that there are no significant upwards trends.
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{always-elimination}:]
+always-elimination: After the viremia peak, no significant upward trends occur.
    
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{neglect-drugs}:]
-neglect-drugs: The clearance rate will not be affected by drugs or other 
-therapy that may cause faster clearance. (Ref By: \lcref{LC_artherapy})
+neglect-drugs: The effect of antibiotic drugs or therapy on the elimination rate 
+will not be considered. (Ref By: \iref{VLelimination}, \iref{VLat30})
   
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{neglect-sick}:]
-neglect-sick: The clearance rate will not be affected by other viruses 
-that may cause that may cause slower clearance.
+neglect-sick: The effect of other infections on the elimination rate will not be 
+considered. (Ref By: \iref{VLelimination}, \iref{VLat30})
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{clear-proportional-amt}:]
-clear-proportional-amt: At any point in time, the clearing is assumed to be 
-proportional to the amount of viruses present. (Ref By: \lcref{T_ExpClear})
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{proportional}:]
+proportional: The elimination of the virus is assumed to be proportional to the 
+amount of viruses present. (Ref By: \iref{VLelimination}, \iref{VLat30})
 
 \end{itemize}
 
 \subsubsection{Theoretical Models}\label{sec_theoretical}
 
-This section focuses on the general equations that diagnosis-AIDs is based 
+This section focuses on the general equations that \progname{} is based 
 on.
+
 ~\newline
 
 \noindent
@@ -504,64 +546,32 @@ on.
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   \hline
   \rowcolor[gray]{0.9}
-  Number& T\refstepcounter{theorynum}\thetheorynum  :IsClearing
-\label{T_isClearing}\\
+  Number& T\refstepcounter{theorynum}\thetheorynum :expElim
+\label{T_expElim}\\
   \hline
-  Label&\bf Determination of Clearing  \\
+  Label&\bf Rate of Change of Viral Load  \\
   \hline
-  Equation&  $isClearing$ = $VL_1 > VL_2$\\
+  Equation&  $r$= $\frac{dN_{t}}{dt}$ = $-kN_{o}$\\
   &\\
   \hline
-  Description & $isClearing$ is the requirement that needs to be satisfied to 
-provide a proper estimate. $VL_1$ is the initial viral load. $VL_2$ is the viral 
-load after 24 hours. 
-&\\
-    \hline
-  Source & HIV-1 Dynamics in Vivo: Virion Clearance Rate, Infected Life Span and 
-Viral 
-Generation Time \citep{Perelson1582}
+  Description & 
+  $r$ is the rate of change of the viral load ($\frac{mol}{mLd}$)\\
+  & $t$ is the time (d) \\
+  & $N_t$ is the viral load at time t ($\frac{mol}{mL}$)\\
+  & $k$ is the elimination constant ($d^-{1}$)\\
+  & $N_o$ is the initial viral load ($\frac{mol}{mL}$)\\
+  
+  \hline
+  Source & \citep{libretexts_2020}
 \\
 &\\
   \hline
-  Ref.\ By & \aref{always-clear} , Subsection~\ref{Sec_constraints}, \rref 
-{R_Inputs}\\ 
+  Ref.\ By & \dref{GD_vLoadt}\\ 
   \hline
 \end{tabular}
 \end{minipage}\\
 ~\newline
 
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-  \hline
-  \rowcolor[gray]{0.9}
-  Number& T\refstepcounter{theorynum}\thetheorynum : ExpClearing 
-\label{T_ExpClear}\\
-  \hline
-  Label&\bf Function of Exponential Clearing \\
-  \hline
-  Equation&  $N_t$ = $N_{0} e^{-\lambda t}$\\
-  \hline
-  Description &  The above equation gives the exponential decrease in quantity 
-for a certain time $t$ and clearing rate $\lambda$.
-&\\
-&  $N_{0}$ is the initial amount that will undergo an exponential 
-decrease. $N_{0}$ is equivalent to $N(t= 0)$.\\
-&  $e^x$ is the exponential function. \\
-&  $\lambda$ is the clearing constant. \\
-&  $t$ is the time elapsed from the initial time.\\
-&  $N_t$ is the amount after time, $t$, has elapsed.    \\
-&\\
-  \hline
-  Source & \citep{weisstein}
-\\
-  \hline
-  Ref.\ By & \gdref{rate-c}\\
-  \hline
-\end{tabular}
-\end{minipage}\\
-~\newline
 
 \subsubsection{General Definitions}\label{sec_gendef}
 
@@ -576,44 +586,50 @@ instance models.
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
 \hline
 \rowcolor[gray]{0.9}
-Number& GD\refstepcounter{defnum}\thedefnum : $rate_c$ \label{rate_C}\\
+Number& GD\refstepcounter{defnum}\thedefnum : vLoadt \label{GD_vLoadt}\\
 \hline
-Label &\bf Concentration Rate law \\
-\hline
-% Units&$MLt^{-3}T^0$\\
-% \hline
-&\\
-SI Units&\si{$\dfrac{1 / 10^{-3}m^3}{s}$}\\
-&\\
+  Label&\bf VLoadt as a function of time for constant decay rate \\
+  \hline
+  Equation&  $N_t$ = $N_{o} e^{-k t}$\\
+  \hline
+  Description &  
+  $N_{o}$ is the initial amount that will undergo an exponential 
+decrease. $N_{o}$ is equivalent to $N(t= 0)$.\\
+&  $N_t$ is the viral load at time t ($\frac{mol}{mL}$)\\
+&  $k$ is the clearing constant ($d^{-1}$) \\
+&  $t$ is the time ($d$)\\
 
-\hline
-&\\
-Equation&$ rate_c = -\dfrac{\Delta A}{\Delta t} = 
--\dfrac{A_{2}-A_{1}}{t_{2}-t_{1}}  $  \\
 &\\
 \hline
-Description &
-The Concentration Rate law describes a clearing rate of a substance that is 
-directly 
-proportional to it's concentration. 
-&\\
-& $rate_c$ is the time-dependent concentration gradient. 
-($\dfrac{1 / 10^{-3}m^3}{s}$).\\
-& $\Delta A$ = $A_{2}-A_{1}$ is the change in amount of substance 
-($\dfrac{1}{10^{-3}m^3}$).\\
-&$\Delta T$= $t_{2}-t_{1}$ is the time elapsed between $A_{2}$ and $A_{1}$ 
-(\si{\s}).
-&\\
-&\\
-\hline
-  Source & \citep{Fischer6706}
+  Source & \citep{hobbie_roth_1970}
  \\
   \hline
-  Ref.\ By & \aref{clearing-proportional-amt}, \tref{T_isClearing}, 
-\tref{T_ExpClearing}\\
+  Ref.\ By & \iref{VLelimination} , \iref{VLat30}\\
   \hline
 \end{tabular}
 \end{minipage}\\
+
+\subsubsection*{Detailed derivation of viral load at time t:}
+
+\label{GD:vLoadtDeriv}
+Using the First-Order rate Law in \hyperref[T_expElim]{TM: expElim}, we have:
+
+\begin{displaymath}
+\frac{\,dN}{\,dt}=-k {N_{\text{o}}}
+\end{displaymath}
+Where ${N_{\text{t}}}$ denotes the viral load at time t, ${N_{\text{o}}}$ 
+denotes the initial viral load and $k$ denotes the elimination constant. When 
+rearranging for integration,  we have:
+
+\begin{displaymath}
+\int_{{N_{\text{o}}}}^{{N_{\text{t}}}}{1}\,d{N_{\text{t}}}=-\int_{0}^{t}{k}\,dt
+\end{displaymath}
+Performing the integration, we have the required equation:
+
+\begin{displaymath}
+{N_{\text{t}}}={N_{\text{o}}} e^{-k t}
+\end{displaymath}
+
 
 
 \subsubsection{Data Definitions}\label{sec_datadef}
@@ -629,38 +645,32 @@ models.
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
 \hline
 \rowcolor[gray]{0.9}
-Number& DD\refstepcounter{datadefnum}\thedatadefnum: conc-virus
-\label{Concentration}\\
+Number& DD\refstepcounter{datadefnum}\thedatadefnum: Viral load
+\label{DD_viralload}\\
 \hline
-Label& \bf Viral Load within the body at a given time\\
+Label& \bf Viral Load \\
 \hline
-Symbol &$VL$\\
+Symbol &$N$\\
 \hline
-% Units& $Mt^{-3}$\\
-% \hline
-&\\
-  SI Units & $\dfrac{virions}{10^{-3}m^3}$\\
-  &\\
-  \hline
-  &\\
-  Equation& $VL = \dfrac{num_{virions}}{volume}$ \\
-  &\\
-  \hline
-  Description & Viral load describes the concentration of the virus within the 
-body at certain time $t$.
- & \\ 
-& $VL$ is the viral load at a given time ($\dfrac{virions}{10^{-3}m^3}$). \\
-& $num_virions$ is the number of virions in the body 
-($volume$).\\
-& $volume$ is the amount  of three-dimensional space associated with the body 
-($10^{-3}m^3$).\\
 
+&\\
+  Units & $\dfrac{mol}{mL}$\\
+  &\\
+  \hline
+  &\\
+  Equation& $N = \dfrac{n}{V}$ \\
+  &\\
+  \hline
+  Description & 
+ $N$ is the viral load at a given time ($\dfrac{mol}{mL}$). \\
+ & $n$ is the number of virions ($mol$).\\
+ & $V$ is the volume ($mL$).\\
 &\\
   \hline
   Sources& \citep{Fischer6706}
  \\
   \hline
-  Ref.\ By & \iref{VLclear} , \iref{VLat30}\\
+  Ref.\ By & \iref{VLelimination} , \iref{VLat30}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -672,8 +682,10 @@ which is expressed in mathematical terms. It uses concrete symbols defined in
 Section~\ref{sec_datadef} to replace the abstract symbols in the models 
 identified in Sections~\ref{sec_theoretical} and~\ref{sec_gendef}.
 
-The goals GS ~\ref{G_determine-decay-rate}: determine-clear-rate and GS 
-~\ref{G_predict-VL-30}: predict-VL-30 are met by IM: VLclear and IM:VLat30.
+The goals GS\ref{G_determine-elimination-rate}: determine-elimination-rate and 
+GS\ref{G_predict-VL-30}: predict-VL-30 are met by \iref{VLelimination}and \iref{VLat30}.
+
+
 
 ~\newline
 
@@ -685,37 +697,63 @@ The goals GS ~\ref{G_determine-decay-rate}: determine-clear-rate and GS
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   \hline
   \rowcolor[gray]{0.9}
-  Number& IM\refstepcounter{instnum}\theinstnum : VLclear \label{VLclear}\\
+  Number& IM\refstepcounter{instnum}\theinstnum : calofElimConst 
+\label{VLelimination}\\
   \hline
-  Label& \bf Using clearance rate $\lambda$ to find VL_{30}\\
+  Label& \bf Calculation of elimination rate\\
   \hline
-  Input&$VL_1$, $VL_2$, $t$\\
-  & The input is constrained so that $VL_1 \geq 0$, $VL_2 \geq 0$, $t \geq 0$
-(\aref{A_charge}) and $VL_1 \geq VL_2$ (\aref{A_charge})
+  Input&$N_{t}$, $N_{o}$, $t_{t}$\\
+  & The input is constrained so that $N_{o} > N_{t} > 0$, $t_{t} > 0$
 \\
   \hline  
-  Output& $ \lambda \leq 0 $, such that\\
-  &$\frac{dVL}{dt} = - \lambda VL$, \\
-  &$\lambda = -VL \frac{dt}{dV}$ \\
+  Output& $ k$, such that\\
+  &$k = \frac{ln(N_{o})-ln(N_{t})}{t_{t}}$\\
  
   \hline
-  Description&$\lambda$ is the clearance rate of the viral load.\\
-  &$\frac{dVL}{dt} =  \dfrac{VL_{2}-VL_{1}}{t_{2}-t_{1}}$ is the change in viral 
-load over time.\\
-  &$VL_n$ is the viral load at a certain point.\\
-  &\\
+  Description
+  & $k$ is the elimination constant ($d^{-1}$)\\
+  & $N_{o}$ is the initial viral load ($\frac{mol}{mL}$)\\
+  & $N_t$ is the viral load at time t ($\frac{mol}{mL}$)\\
+  &  $t_{t}$ is the time duration between the initial viral load test and 
+secondary viral load test ($d$)\\
+  
   \hline
   Sources& \citep{libretexts_2020}
 
 \\
   \\
   \hline
-  Ref.\ By & \dref{rate_c}\\
+  Ref.\ By & \iref{VLat30} \\
   \hline
 \end{tabular}
 \end{minipage}\\
 
 %~\newline
+\subsubsection*{Detailed derivation of elimination constant:}
+\label{IM:calofElimConstDeriv}
+Using the relationship for the viral load seen in \hyperref[DD_viralload]{DD: 
+viralLoad} with respect to time in \hyperref[GD_vLoadt]{GD: vLoadt}, we have:
+
+\begin{displaymath}
+{N_{\text{t}}}={N_{\text{o}}} e^{-k {t_{\text{t}}}}
+\end{displaymath}
+Where ${N_{\text{t}}}$ denotes the viral load at time $t_{\text{t}}$, ${N_{\text{o}}}$ 
+denotes the initial viral load and $k$ denotes the elimination constant. When 
+isolating for the elimination constant,  we have:
+
+\begin{displaymath}
+\frac{{N_{\text{t}}}}{{N_{\text{o}}}}=e^{-k {t_{\text{t}}}}
+\end{displaymath}
+To isolate further, the natural logarithm is applied:
+
+\begin{displaymath}
+\ln\left(\frac{{N_{\text{t}}}}{{N_{\text{o}}}}\right)=-k {t_{\text{t}}}
+\end{displaymath}
+After using the logarithmic quotient property, we have the required equation:
+
+\begin{displaymath}
+k=\frac{\ln\left({N_{\text{o}}}\right)-\ln\left({N_{\text{t}}}\right)}{{t_{\text{t}}}}
+\end{displaymath}
 
   
 ~\newline
@@ -727,31 +765,56 @@ load over time.\\
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   \hline
   \rowcolor[gray]{0.9}
-  Number& IM\refstepcounter{instnum}\theinstnum : VLat30 \label{VLat30}\\
+  Number& IM\refstepcounter{instnum}\theinstnum : calofPredictedVL 
+\label{VLat30}\\
   \hline
-  Label& \bf Exponential Clearance function relating the viral load and time
+  Label& \bf Calculation of predicted viral load
  \\
   \hline
-  Input&$VL_1$, $\lambda$, $t$ \\
-  & The input is constrained so that $t \geq 0$ and $\lambda \leq 0$
+  Input
+  & $N_{o}$, $k$, $t_{p}$ from \iref{VLelimination}\\
+  & The input is constrained so that $N_{o} > N_{t} > 0$, $t_{p} > t_{t} > 0$ 
+and $k > 0$
  \\
   \hline
-  Output&$VL_t$, $VL_t \leq VL_1$, such that\\
-  &$VL_t = VL_1 (1- \lambda)^t$\\
+  Output
+  & $N_p$, such that\\
+  & $N_p$ = $N_{o} e^{-k t_{p}}$\\
    \\
   \hline
-  Description& $VL_1$ is the initial viral load.\\
-  &$\lambda$ is the clearance rate of the viral load.\\
-  &$t$ is the time elapsed between $VL_t$ and $ VL_1$.\\
+  Description
+&  $N_p$ is the predicted viral load after 30 days ($\frac{mol}{mL}$)\\
+&  $N_{o}$ is the initial viral load ($\frac{mol}{mL}$)\\
+&  $k$ is the clearing constant ($d^{-1}$) \\
+&  $t_p$ is the chosen prediction period ($d$)\\
   \\
   \hline
   Sources& \citep{hobbie_roth_1970}
   \\
   \hline
-  Ref.\ By & \tref{T_ExpClear}\\
+  Ref.\ By & -\\
   \hline
 \end{tabular}
 \end{minipage}\\
+
+\subsubsection*{Detailed derivation of predicted viral load after 30 days:}
+
+\label{IM:calofPredictedVLDeriv}
+Using the relationship for the viral load seen in \hyperref[DD_viralload]{DD: 
+viralLoad} with respect to time in \hyperref[GD_vLoadt]{GD: vLoadt}, we have:
+
+\begin{displaymath}
+{N_{\text{t}}}={N_{\text{o}}} e^{-k {t_{\text{t}}}}
+\end{displaymath}
+Where ${N_{\text{t}}}$ denotes the viral load at time t, ${N_{\text{o}}}$ 
+denotes the initial viral load and $k$ denotes the elimination constant. When 
+predicting the viral load after 30 days, the elimination constant  found in 
+\hyperref[VLelimination]{IM: calofElimConst},  is used instead of 
+${N_{\text{t}}}$  therefore we have:
+
+\begin{displaymath}
+{N_{\text{p}}}={N_{\text{o}}} e^{-k {t_{\text{p}}}}
+\end{displaymath}
 
 %~\newline
 
@@ -770,6 +833,7 @@ provides an estimate of the confidence with which the physical quantities can be
 measured.  This information would be part of the input if one were performing an
 uncertainty quantification exercise.
 
+\begin{center}
 
 \begin{table}[!h]
   \caption{Input Variables} \label{TblInputVar}
@@ -779,20 +843,23 @@ uncertainty quantification exercise.
   \textbf{Var} & \textbf{Physical Constraints} & \textbf{Software Constraints} &
                              \textbf{Typical Value} & \textbf{Uncertainty}\\
   \midrule 
-  $VL_1$ & $VL_1 > 0$ & $VL_1 > VL_2 }$ & $10^6 \frac{virions}{10^{-3}m^3}$ & 
+  $N_o$ & $N_o > 0$ & $N_o > N_t $ & $10*10^6 \frac{mol}{mL}$ & 
 10\%\\
-  $VL_2$ & $VL_2 > 0$ & $VL_1 < VL_2 }$ & $10^6 \frac{virions}{10^{-3}m^3}$ & 
-10\%\\
+  $N_t$ & $N_t > 0$ & $N_o > N_t > 0$ & $5*10^6 \frac{mol}{mL}$ & 10\%\\
+  $t_{p}$ &  $t_{p} > 0$ &  $t_{p}> t_{t} $ & 30 d & N/A\\
+  $t_{t}$ &  $t_{p} > t_{t} > 0$ &  $t_{p}> t_{t} $ & 1 d & N/A\\
+  \\
   \bottomrule
 \end{longtable*}
 \end{table}
+
+\end{center}
 
 
 \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
 
 \noindent
-A correct solution must exhibit a viral load less than the initial viral load 
-($VL_1$). 
+A correct solution must exhibit an elimination constant greater than 0 and a predicted viral load less than the initial and secondary viral load, $N_o$ and $N_t$, respectively. 
 Table~\ref{TblOutputVar} shows the data constraints for the output variables. 
 
 
@@ -803,16 +870,15 @@ Table~\ref{TblOutputVar} shows the data constraints for the output variables.
   \toprule
   \textbf{Var} & \textbf{Physical Constraints} \\
   \midrule 
-  $\lambda$ & $\lambda \leq 0 $ 
-  \\
-  $\VL_30$ & $0 < VL_{30} < VL_2$ 
+  $k$ & $k > 0 $ 
+  \\ 
+  $N_p$ & $N_o > N_p > 0 $ 
    \\
   \bottomrule
 \end{longtable*}
 \end{table}
 
 ~\newpage
-
 \section{Requirements}
 
 This section provides the functional requirements, the business tasks that the
@@ -820,66 +886,71 @@ software is expected to complete, and the non-functional requirements, the
 qualities that the software is expected to exhibit.
 
 \subsection{Functional Requirements}
+\label{sec_FunctionalReq}
 
 \noindent \begin{itemize}
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] \plt{R-Inputs: The 
-viral load 
-concentrations taken on two consecutive days is input. 
-(Subsection~\ref{sec_CorrectSolution})}
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:]Input-Values: Input 
+the values from subsection
+ \ref{sec_DataConstraints}.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Assumptions}:] 
-\plt{R-Assumptions: The system 
-should set the known numbers within values. }
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Constraints}:] \plt{ 
-R-Constraints: AIDsdiagnosis will ensure the input values are not out of bounds 
-and are in 
-accordance to the data constraints.
-Otherwise, an error message will identify the inability of AIDsdiagnosis to 
-run.(Ref by: (Subsection~\ref{sec_DataConstraints}))}
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyInputs}:] 
+Verify-Input-Values: The software will ensure that the inputs are not out of 
+bounds and in accordance with the data constraints. If any inputs are out of 
+bounds, an error message is displayed in subsection \ref{sec_DataConstraints}.
     
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_AIDsdiagnosis}:] 
-\plt{R-AIDsdiagnosis: If all 
-constraints are met, the AIDsdiagnosis will output: 30 day viral load 
-estimation. (Ref by: \iref{VLat30}, \iref{ProgSpeed})}
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:] 
+Calculate-Values: Software calculates the elimination rate of HIV and the viral 
+load at the chosen prediction period from \iref{VLelimination} and 
+\iref{VLat30}.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:]
-  \plt{R-VerifyOutput: The output values will be cross referenced with the 
-output constraints 
-table to ensure the input values are not out of bounds and are in accordance to 
-the results constraints.}
+Verify-Output: The output values will be cross referenced with the result 
+constraints from subsection \ref{sec_CorrectSolution}.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Output}:] \plt{R-Output: 
-Output related requirements.}
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Output}:] 
+Output-Values: Output related requirements including the elimination rate and 
+predicted viral load.
 
 \end{itemize}
 
-\subsection{Nonfunctional Requirements}
+
+\subsection{Non-functional Requirements}
+
+This section provides the non-functional requirements, the qualities that the 
+software is expected to exhibit.
 
 \noindent \begin{itemize}
 
-\item[NR\refstepcounter{nreqnum}\thenreqnum \label{NR_Correctness}:] 
-\plt{Correctness: The output values have to adhere to the output properties in 
-(Subsection~\ref{sec_CorrectSolution}).}
-
 \item[NR\refstepcounter{nreqnum}\thenreqnum \label{NR_Verifiable}:] 
-\plt{Verifiable: The code is tested with a complete verification and validation 
-plan.}
+Verifiable: The Drasil generated python code is tested using static and dynamic 
+code analysis, linting, unit and system testing and continuous integration 
+methods outlined in the Verification and Validation plan of Diagnose 
+\citep{DiagnoseVNVplan}.
 
-\item[NR\refstepcounter{nreqnum}\thenreqnum \label{NR_Usability}:] 
-\plt{Usability: The code will consist of several modules to ensure usability.}
 
 \item[NR\refstepcounter{nreqnum}\thenreqnum \label{NR_Understandability}:] 
-\plt{Understandability: The code will be completed with a module guide and an 
-easy to understand interface.}
+Understandability: The code will be generated using the Drasil Framework into 
+modules to address each requirement in subsection \ref{sec_FunctionalReq}.
+
+\item[NR\refstepcounter{nreqnum}\thenreqnum \label{NR_Reusable}:] 
+Reusable: The code will be created using Drasil. The framework has data 
+libraries of scientific theories, concepts, quantities and units commonly used 
+in scientific problems. The created libraries of \progname{} can be reused as 
+required. \citep{Drasilcreate}
 
 \item[NR\refstepcounter{nreqnum}\thenreqnum \label{NR_Maintainability}:] 
-\plt{The 
-traceability between requirements, assumptions, theoretical models, general 
+Maintainablility: The traceability between requirements, assumptions, 
+theoretical models, general 
 definitions, data definitions, instance models, likely changes, unlikely 
 changes, and modules is completely recorded in traceability matrices in the SRS 
-and module guide.}
+document to measure maintainability. The traceability will be measured by 
+ensuring relationship from inputs to instance model is recorded and 
+identifiable.
+
+\item[NR\refstepcounter{nreqnum}\thenreqnum \label{NR_Portablility}:] 
+Portablility: The generated code is able to run in different environments. 
+
 
 \end{itemize}
 
@@ -890,21 +961,13 @@ This section lists the likely changes to be made to software
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_time-frame}:] \plt{ Time Frame: 
-The program may be expanded to cover a wide range of time frames, greater than 
-30 
-days.}
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_more_inputs}:] More-Inputs: The 
+software may be expanded to include more inputs from the user to increase the 
+accuracy of the output.
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_progression-acc}:] \plt{ Better 
-Progression Accuracy: The program may become more exact in terms of determining 
-the time to AIDs.}
-
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_artherapy}:] 
-\plt{Addition of Therapy: The program may be extended to assess the progression 
-due to the patient’s 
-immune response as well as the retroviral therapy. (Ref by: 
-\aref{neglect-drugs})}
-
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_more_outputs}:] 
+More-outputs: The program may be extended to include more outputs like assessing 
+the progression to AIDs or suggestion for therapy.
 \end{itemize}
 
 \section{Unlikely Changes}    
@@ -913,21 +976,17 @@ This section lists the unlikely changes to be made to the software.
 
 \begin{itemize}
 
-\item[UC\refstepcounter{ucnum}\theucnum\label{ULC_determine-decay-rate}:] 
-\plt{determine-decay-rate: The goal to simulate the interactions between the 
-virions and the immune System cells will remain unchanged. (Ref By: 
-\ref{R_Constraints})}
+\item[UC\refstepcounter{ucnum}\theucnum\label{ULC_determine-elimination-rate}:] 
+determine-elimination-rate: The goal of determining the elimination rate of the 
+virus will not likely change.
 
 \item[UC\refstepcounter{ucnum}\theucnum\label{ULC_external-input}:] 
-\plt{external-input: There will always be a source of input data external to the 
-software. (Ref By: R: \ref{R_Inputs})}
+external-input: There will always be a source of input data external to the 
+software.
 
 \item[UC\refstepcounter{ucnum}\theucnum\label{ULC_constant-conditions}:] 
-\plt{constant-conditions: Constant temperature and body conditions are met. (Ref 
-by: \aref{const-volume}, \aref{const-conditions})}
-
+constant-conditions: The input constraints will not likely change.
 \end{itemize}
-
 
 \section{Traceability Matrices and Graphs}
 
@@ -952,18 +1011,16 @@ the assumptions.
 \hline
 	& \aref{initial-inf}& \aref{const-growth}& \aref{const-volume}& 
 \aref{const-conditions}& 
-\aref{all-productive}& \aref{always-decay}& \aref{neglect-drugs}& 
-\aref{neglect-sick}& \aref{decay-proportional-amt} \\
+\aref{all-productive}& \aref{always-elimination}& \aref{neglect-drugs}& 
+\aref{neglect-sick}& \aref{proportional} \\
 \hline
-\tref{T_isDecaying}        &X & & & & &X & & &  \\ \hline
-\tref{T_ExpDecay}        & &X &X &X &X & &X &X &X  \\ \hline
-\dref{rate_D}           & &X &X &X & & & & &X  \\ \hline
-\ddref{Concentration}     & &X &X &X &X & & & &X  \\ \hline
-\iref{VLdecay}         & &X &X &X &X & & & &X  \\ \hline
+\tref{T_expElim}        &X & & & & &X & & &  \\ \hline
+\dref{GD_vLoadt}           & &X &X &X & & & & &X  \\ \hline
+\ddref{DD_viralload}     & &X &X &X &X & & & &X  \\ \hline
+\iref{VLelimination}         & &X &X &X &X & & & &X  \\ \hline
 \iref{VLat30}         & &X &X &X &X &X & & &X  \\ \hline
-\lcref{LC_time-frame}     &X & & & & & & & &  \\ \hline
-\lcref{LC_progression-acc}    & & & & &X &X & & &X  \\ \hline
-\lcref{LC_artherapy}   & & & & & & &X &X &X  \\ \hline
+\lcref{LC_more_inputs}     &X & & & & & & & &  \\ \hline
+\lcref{LC_more_outputs}    & & & & &X &X & & &X  \\ \hline
 
 \hline
 \end{tabular}
@@ -979,16 +1036,15 @@ Other Items}
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|}
 \hline        
-	& \tref{T_isDecaying}& \tref{T_ExpDecay}& \dref{rate_D}& \ddref{Concentration}& 
-\iref{VLdecay} & 
+	& \tref{T_expElim}&  \dref{GD_vLoadt}& \ddref{DD_viralload}& 
+\iref{VLelimination} & 
 \iref{VLat30} \\
 \hline
-\tref{T_isDecaying}        & & &X & & & \\ \hline
-\tref{T_ExpDecay}        & & &X & & &  \\ \hline
-\dref{rate_D}           &X &X & & & & \\ \hline
-\ddref{Concentration}     & & & & &X &X \\ \hline
-\iref{VLdecay}         & & &X &X & &X \\ \hline
-\iref{VLat30}         & &X &X &X &X & \\ 
+\tref{T_expElim}        & & & & &  \\ \hline
+\dref{GD_vLoadt}        & & & & &  \\ \hline
+\ddref{DD_viralload}    & &X & & &  \\ \hline
+\iref{VLelimination}    &X & &X & &X  \\ \hline
+\iref{VLat30}           &X & &X &X & \\ 
 \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Items of Different 
@@ -998,15 +1054,15 @@ Sections}
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
 	& \ref{sec_DataConstraints}& \rref{R_Inputs}& 
-\rref{R_Assumptions}& \rref{R_Constraints}& \rref{R_AIDsdiagnosis}& 
+\rref{R_VerifyInputs}& \rref{R_Calculate}& 
 \rref{R_VerifyOutput}& \rref{R_Output} 
 \\
 \hline
-\iref{VLdecay}         	&X &X &X &X & & & \\ \hline
-\iref{VLat30}			&X & &X & &X &X &X  \\ 
+\iref{VLelimination}    &X & & &X &X &X \\ \hline
+\iref{VLat30}		   &X & & &X &X &X  \\ 
 \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Requirements and 
@@ -1027,9 +1083,18 @@ changed.
 \section{References}
 
 \bibliographystyle {plainnat}
-\bibliography{SRSref.bib}
+\bibliography{References.bib}
+
+%\newpage
+
+%\bibliographystyle {plainnat}
+%\bibliography {../../refs/References}
+
+
+\newpage
 
 \newpage
 
 
 \end{document}
+
