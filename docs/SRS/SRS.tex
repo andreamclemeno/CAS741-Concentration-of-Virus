@@ -99,6 +99,7 @@ Tool for Acquired immunodeficiency syndrome (AIDS)}
 
 ~\newpage
 
+
 \section*{Revision History}
 
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
@@ -154,30 +155,30 @@ their units. The symbols are listed in alphabetical order.
 \midrule 
 $k$ & $d^{-1}$ & Elimination Constant
 \\
-$N$ & \si[per-mode=symbol]{\dfrac{\mol}{\mL}} & Viral Load
+$N$ & $\dfrac{mol}{mL}$ & Viral Load
 \\ 
-$N_{o}$ & \si[per-mode=symbol]{\dfrac{\mol}{\mL}} & Initial Viral Load
+$N_{o}$ & $\dfrac{mol}{mL}$  & Initial Viral Load
 \\ 
-$N_{p}$ & \si[per-mode=symbol]{\dfrac{\mol}{\mL}} & Predicted Viral Load at time 
+$N_{p}$ & $\dfrac{mol}{mL}$  & Predicted Viral Load at time 
 $t_{p}$
 \\ 
-$N_{t}$ & \si[per-mode=symbol]{\dfrac{\mol}{\mL}} & Viral Load at time $t_{t}$
+$N_{t}$ & $\dfrac{mol}{mL}$  & Viral Load at time $t_{t}$
 \\ 
-$n$ & \si[per-mode=symbol]{\mol} & Number of virions
+$n$ & $mol$ & Number of virions
 \\ 
-$r$ & \si[per-mode=symbol] {\dfrac{\mol}{mL*d}} & Rate of change of the viral 
+$r$ & $\dfrac{mol}{mL*d}$  & Rate of change of the viral 
 load
 \\
-$t$ & \si[per-mode=symbol] {\day} & Time
+$t$ & $d$ & Time
 \\
 
-$t_{p}$ & \si[per-mode=symbol] {\second} & Time duration of chosen prediction 
+$t_{p}$ & $d$ & Time duration of chosen prediction 
 period 
 \\
-$t_{t}$ & \si[per-mode=symbol] {\second} & Time duration between initial and  
+$t_{t}$ & $d$ & Time duration between initial and  
 secondary viral load test
 \\
-$V$ & \si[per-mode=symbol] {\mL} & Volume
+$V$ & $mL$ & Volume
 \\
 &\\
 \bottomrule
@@ -903,8 +904,8 @@ bounds and in accordance with the data constraints. If any inputs are out of
 bounds, an error message is displayed in subsection \ref{sec_DataConstraints}.
     
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:] 
-Calculate-Values: Software calculates the elimination rate of HIV and the viral 
-load at the chosen prediction period from \iref{VLelimination} and 
+Calculate-Values: Software calculates the initial elimination rate of HIV and the predicted viral 
+load from \iref{VLelimination} and 
 \iref{VLat30}.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:]
@@ -913,7 +914,7 @@ constraints from subsection \ref{sec_CorrectSolution}.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Output}:] 
 Output-Values: Output related requirements including the elimination rate and 
-predicted viral load.
+predicted viral load to satisfy the goals of \progname{}: determine-elimination-rate (GS\ref{G_determine-elimination-rate}) and determine-elimination-rate (GS\ref{G_predict-VL-30}).
 
 \end{itemize}
 
@@ -946,10 +947,9 @@ required. \citep{Drasilcreate}
 Maintainablility: The traceability between requirements, assumptions, 
 theoretical models, general 
 definitions, data definitions, instance models, likely changes, unlikely 
-changes, and modules is completely recorded in traceability matrices in the SRS 
-document to measure maintainability. The traceability will be measured by 
+changes, and modules is completely recorded in traceability matrices throughout the documentation of  \progname{} to measure maintainability. The traceability will be measured by 
 ensuring relationship from inputs to instance model is recorded and 
-identifiable.
+identifiable. 
 
 \item[NR\refstepcounter{nreqnum}\thenreqnum \label{NR_Portablility}:] 
 Portablility: The generated code is able to run in different environments. 
@@ -1086,9 +1086,7 @@ changed.
 \section{References}
 
 \bibliographystyle{plainnat}
-\bibliography {../../refs/References}
-
-%\bibliography{references.bib}
+\bibliography{references.bib}
 
 %\newpage
 
