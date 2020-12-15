@@ -173,10 +173,8 @@ is provided using issues on GitHub repository: CAS741-Diagnose.
 
 The verification of the SRS will be done to ensure that the requirements 
 specified are in alignment with the outlined objective of the \progname{} 
-program. The SRS verification plan will involve reviewing the document against 
-the SRS checklist and providing feedback using issues on GitHub repository 
-\citep{SRSchecklist}. The results will be summarized in the VnV report 
-\citep{DiagnoseVNVreport}. The 
+program. The feedback 
+is provided using issues on GitHub repository: CAS741-Diagnose. The 
 reviewers that will verify the SRS document include: the class instructor, Dr. 
 Smith;  the domain expert reviewer, Elizabeth Hofer; the secondary reviewer, 
 Tiago de Moraes Machado; the project developer, Andrea Clemeno.
@@ -291,7 +289,7 @@ input constraints tests.
  \hline
  TC-3-1 & 12000000 & 0 & 1 & 30 & Exception: InputError\\
  \hline
- TC-3-2 & 12000000 & -10000000 & 1 & 30 & Exception: InputError\\ 
+ TC-3-2 & 12000000 & -5000000 & 1 & 30 & Exception: InputError\\ 
  \hline
  TC-4-1 & 5000000 & 12000000 & 1 & 30 & Exception: InputError\\ 
  \hline
@@ -314,7 +312,7 @@ input constraints tests.
 
 \begin{enumerate}
 
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-1}:
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-1}: Expected Input
 
 Control: Automatic
 					
@@ -330,7 +328,7 @@ previous test to ensure successful input.
 					
 How test will be performed: Pytest will be implemented.
 					
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-2}:
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-2}: Invalid Input: $N_{o}$
 
 Control: Automatic
 					
@@ -347,7 +345,7 @@ respectively.
 How test will be performed: Pytest will be implemented.
 
 
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-3}:
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-3}: Invalid Input: $N_{t}$
 
 Control: Automatic
 					
@@ -363,7 +361,7 @@ value. TC-3-1 and TC-3-2 have zero and negative inputs for $N_{t}$ respectively.
 How test will be performed: Pytest will be implemented.
 
 
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-4}:
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-4}: Invalid Inputs: $N_{o}$, $N_{t}$
 
 Control: Automatic
 					
@@ -379,7 +377,7 @@ of bounds and not an expected input values.
 How test will be performed: Pytest will be implemented.
 
 
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-5}:
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-5}: Invalid Input: $t_{t}$
 
 Control: Automatic
 					
@@ -395,7 +393,7 @@ value. TC-5-1 and TC-5-2 have zero and negative inputs for $t_{t}$ respectively.
 How test will be performed: Pytest will be implemented.
 
 
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-6}:
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-6}: Invalid Input: $t_{p}$
 
 Control: Automatic
 					
@@ -411,7 +409,7 @@ value. TC-6-1 and TC-6-2 have zero and negative inputs for $t_{p}$ respectively.
 How test will be performed: Pytest will be implemented.
 
 
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-7}:
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-7}: Invalid Inputs: $t_{t}$, $t_{p}$
 
 Control: Automatic
 					
@@ -433,7 +431,7 @@ How test will be performed: Pytest will be implemented.
 
 \begin{enumerate}
 
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-8}:
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-8}: Expected Input
 
 Control: Automatic
 					
@@ -460,50 +458,13 @@ nonfunctional requirements seen in the SRS document of \progname{}. The
 subsections are be separated for different requirements, including 
 verifiability, understandable, reusable, maintainable, and portable.
 
-\subsubsection{Verifiability}
-		
-\paragraph{Testing the verifiability of \progname{}:}
-\begin{enumerate}
-
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-9}:
-
-Type: Manual 
-					
-Initial State: Functional requirements system testing completed.
-					
-Condition: Software must output expected values and errors stated in section 
-\ref{tfr}.
-					
-Result: Functional requirements of SRS are verified using unit and system testing.
-					
-How test will be performed: The test will be implemented manually inspecting the 
-completion on the tests outlined in sections \ref{tfr} and \ref{utnfr}. A successful test is specified by the verification of each test for functional requirements.
-					
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-10}:
-
-Type: Manual 
-					
-Initial State: Non-functional requirements testing completed.
-					
-Condition: Software must pass tests for non-functional requirements in section 
-\ref{tfr}. 
-					
-Result: Non-functional requirements of SRS are verified using system testing.
-					
-How test will be performed: The test will be implemented manually inspecting the 
-completion on the tests outlined in sections \ref{nonfunc_understability}, 
-\ref{nonfunc_reliability},  \ref{nonfunc_maintainability} and 
-\ref{nonfunc_portability}. A successful test is specified by the verification of each test for non-functional requirements in section \ref{tnfr}.
-					
-
-\end{enumerate}
 
 \subsubsection{Understandability} \label{nonfunc_understability}
 
 \paragraph{Testing the understandability of \progname{}:}
 \begin{enumerate}
 
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-11}:
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-9}:
 
 Type: Automatic
 					
@@ -523,7 +484,7 @@ How test will be performed: Test will be performed by linting using Spyder. A su
 
 \begin{enumerate}
 
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-12}:
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-10}:
 
 Type: Automatic
 					
@@ -546,7 +507,7 @@ per function call and cumulative time spent on a given function. A successful te
 
 \begin{enumerate}
 
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-13}:
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-11}:
 
 Type: Manual
 					
@@ -570,7 +531,7 @@ goals of \progname{}. A successful test is specified by the verification of conn
 
 \begin{enumerate}
 
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-14}:
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-12}:
 
 Type: Manual
 					
@@ -584,6 +545,45 @@ How test will be performed: The test will be performed manual by executing the
 make command in terminal of different OS, including Linux, Windows, MacOS.  A successful test is specified by the verification of each test for functional requirements. A successful test is specified by the GENERATED OUTPUT MATCHES STABLE VERSION indicator in terminal.
 					
 \end{enumerate}
+
+\subsubsection{Verifiability}
+		
+\paragraph{Testing the verifiability of \progname{}:}
+\begin{enumerate}
+
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-13}:
+
+Type: Manual 
+					
+Initial State: Functional requirements system testing completed.
+					
+Condition: Software must output expected values and errors stated in section 
+\ref{tfr}.
+					
+Result: Functional requirements of SRS are verified using unit and system testing.
+					
+How test will be performed: The test will be implemented manually inspecting the 
+completion on the tests outlined in sections \ref{tfr} and \ref{utnfr}. A successful test is specified by the verification of each test for functional requirements.
+					
+\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-14}:
+
+Type: Manual 
+					
+Initial State: Non-functional requirements testing completed.
+					
+Condition: Software must pass tests for non-functional requirements in section 
+\ref{tfr}. 
+					
+Result: Non-functional requirements of SRS are verified using system testing.
+					
+How test will be performed: The test will be implemented manually inspecting the 
+completion on the tests outlined in sections \ref{nonfunc_understability}, 
+\ref{nonfunc_reliability},  \ref{nonfunc_maintainability} and 
+\ref{nonfunc_portability}. A successful test is specified by the verification of each test for non-functional requirements in section \ref{tnfr}.
+					
+
+\end{enumerate}
+
 
 
 \subsection{Traceability Between Test Cases and Requirements}
@@ -632,8 +632,6 @@ which test cases are supporting which requirements.
 \hline
 \tinref{T-15}        	& & &X & & & & & & &\\
 \hline
-\tinref{T-16}			&X &X &X &X &X & & & & &\\
-\hline
 
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Requirements and 
@@ -668,7 +666,7 @@ reference names the test(s) where the testing plan can be found.
  \hline
   Calculations.py & unit & unittest in Python & \tinref{T-15}\\
   \hline
-  Control.py & unit & unittest in Python & \tinref{T-16}\\
+  Control.py & system & Pytest & \tinref{T-1}, \tinref{T-8}\\
   \hline
   InputConstraints.py & system & Pytest & \tinref{T-1}, \tinref{T-8}\\
   \hline
@@ -689,8 +687,7 @@ reference names the test(s) where the testing plan can be found.
 
 The verification for the functional requirements will be completed through 
 automated testing using methods outlined in Table \ref{tablemod}. Unit testing 
-processes are outlined for Calculations.py in section \ref{modcalc} and for 
-Control.py in section \ref{modcontrol}.
+processes are outlined for Calculations.py in section \ref{modcalc}.
 
 \subsubsection{Calculations.py}\label{modcalc}
 
@@ -703,7 +700,7 @@ Type: Automatic
 Initial State: Calculations.py generated from Drasil and test\_Calculations.py 
 created.
 					
-Input: test\_Calculations.py 
+Input: test\_Calculations.py, TC-1-1 txt file
 					
 Output: Terminal output with OK indicator
 
@@ -721,33 +718,6 @@ The confirmation of OK indicator will specify a successful test.
     
 \end{enumerate}
 
-\subsubsection{Control.py}\label{modcontrol}
-\begin{enumerate}
-\item{T-}\refstepcounter{tinnum}\thetinnum\label{T-16}:
-
-Type: Automatic
-					
-Initial State: Control.py generated from Drasil and test\_Control.py 
-created.
-					
-Input: test\_Control.py
-					
-Output: Terminal output with OK indicator
-
-Test Case Derivation: Exceptions raised by Control.py are possible. If unittest fails because an exception is raised, Control.py is not behaving correctly. This test case was derived to determine behaviour irregularities.
-
-How test will be performed: Test is performed by implementing unittest in the 
-terminal. In the directory of the test\_Control.py code, the following 
-command will be executed: 
-\begin{center}
-python3 -m unittest test\_Control.py
-\end{center}
-
-The confirmation of OK indicator will specify a successful test.
-			
-					
-    
-\end{enumerate}
 
 
 \subsection{Tests for Nonfunctional Requirements}
@@ -800,8 +770,6 @@ InputParameter.py & OutputFormat.py \\
 \tinref{T-14}			& & & & & &  \\
 \hline
 \tinref{T-15}			& & &X & & &  \\
-\hline
-\tinref{T-16}			&X &X &X &X &X &X \\
 \hline
 
 \end{tabular}
