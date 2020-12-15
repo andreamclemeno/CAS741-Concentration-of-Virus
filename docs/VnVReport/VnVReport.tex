@@ -3,6 +3,30 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+
+% from SRS
+\usepackage{amsmath, mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage{xr}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{xfrac}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{pdflscape}
+\usepackage{afterpage}
+%%%
+
+\usepackage{tikz}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- 
+cycle;} 
+
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -10,7 +34,12 @@
     linkcolor=red,
     urlcolor=blue
 }
+
 \usepackage[round]{natbib}
+
+\newcounter{tinnum} %Likely change number
+\newcommand{\lthetinnum}{T\thetinnum}
+\newcommand{\tinref}[1]{T-\ref{#1}}
 
 \input{../Comments}
 \input{../Common}
@@ -31,6 +60,8 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 December 10 & 1.0 & Initial pdf\\
+December 12 & 1.1 & Notes\\
+December 15 & 2.0 & Final Documentation of VnV Report\\
 
 \bottomrule
 \end{tabularx}
@@ -39,59 +70,446 @@ December 10 & 1.0 & Initial pdf\\
 
 \section{Symbols, Abbreviations and Acronyms}
 
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{l l} 
-  \toprule		
-  \textbf{symbol} & \textbf{description}\\
-  \midrule 
-  T & Test\\
-  \bottomrule
-\end{tabular}\\
+The table that follows summarizes the symbols used in this document along with
+their descriptions. The symbols are listed in alphabetical order. In addition, 
+all symbols, abbreviations, and acronyms recorded in the SRS and VnV plan for 
+\progname{} 
+apply to this document. Documents can be found in \citet{SRS} and 
+\citet{DiagnoseVNVplan} respectively.
 
-\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
+
+\begin{table}[h!]
+\renewcommand{\arraystretch}{1.2}
+%\noindent \begin{tabularx}{1.0\textwidth}{l l X}
+\noindent \begin{longtable*}{l p{8cm}} \toprule
+\textbf{symbol} & \textbf{description}\\
+\midrule 
+SRS & Software Requirements Specification
+\\
+T & Test 
+\\
+VnV & Verification and Validation 
+\\
+&\\
+\bottomrule
+
+\end{longtable*}
+\caption{Table of Symbols, Abbreviations and Acronyms}
+\end{table}
 
 \newpage
 
 \tableofcontents
-
+\newpage
 \listoftables %if appropriate
-
+\newpage
 \listoffigures %if appropriate
+\newpage
 
 \newpage
 
 \pagenumbering{arabic}
 
-This document ...
+This document will present the results and findings for the tests outlined in 
+the VnV plan of \progname{} \citep{DiagnoseVNVplan}. The evaluation of 
+functional and nonfunctional requirements with system testing methods can be 
+found in 
+sections \ref{fr_eval} and \ref{nfr_eval} respectively. In addition to system 
+testing results, unit testing for some modules of \progname{} in section 
+\ref{unittesting}. The validation of the \progname{} software
+will be compared to existing data for viral load elimination from 
+\citet{Stafford2000} in section \ref{validation}. Moreover, changes to the code 
+with respect to these evaluations will be mentioned in section \ref{changes}. 
+Lastly, the automated testing evaluations will be mentioned in section 
+\ref{autotesting}.
 
-\section{Functional Requirements Evaluation}
 
-\section{Nonfunctional Requirements Evaluation}
+\section{Functional Requirements Evaluation}\label{fr_eval}
 
-\subsection{Usability}
+\subsection{Input Verification}
+
+\begin{center}
+ \begin{tabular}{||c|c|c||} 
+ \hline
+  \bf{Test} & \bf{Test Description} & \bf{Verification Complete}\\ [0.5ex] 
+  \hline
+   T-1 & Expected Input & \checkmark \\
+  \hline
+   T-2 & Invalid Input: $N_{o}$ & \checkmark \\
+  \hline
+   T-3 & Invalid Input: $N_{t}$ & \checkmark \\
+  \hline
+   T-4 & Invalid Inputs: $N_{o}$, $N_{t}$ & \checkmark \\
+  \hline
+   T-5 & Invalid Input: $t_{t}$ & \checkmark \\
+  \hline
+   T-6 & Invalid Input: $t_{d}$ & \checkmark \\
+  \hline
+   T-7 & Invalid Inputs: $t_{t}$, $t_{p}$ & \checkmark \\
+  \hline
+\end{tabular}
+\captionof{table}{Functional Requirements Evaluation: Input Verification}
+\label{table_inputverification}
+
+\end{center}	
+
+
+\subsection{Output Correctness}
+
+\begin{center}
+ \begin{tabular}{||c|c|c||} 
+ \hline
+  \bf{Test} & \bf{Test Description} & \bf{Verification Complete}\\ [0.5ex] 
+  \hline
+   T-8 & Expected Input & \checkmark \\
+  \hline
+\end{tabular}
+\captionof{table}{Functional Requirements Evaluation: Output Correctness}
+\label{table_outputcorrectness}
+
+\end{center}	
+
+
+\section{Nonfunctional Requirements Evaluation}\label{nfr_eval}
 		
-\subsection{Performance}
+\subsection{Understandability}
 
-\subsection{etc.}
-	
-\section{Comparison to Existing Implementation}	
+A successful test is specified by the automatic verification of no error 
+messages in the linting process. The static analysis run in the Spyder IDE found 
+no error messages seen in table \ref{lintingresults}. Overall, the verification 
+of understandability has been successful as seen in table 
+\ref{table_understandability}. Documentation of test results can be found on the 
+github repository: 
+\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test}.
+
+\begin{center}
+ \begin{tabular}{||c|c|c|c|c|c||} 
+
+ \hline
+  \bf{Module} & \bf{Conventions} & \bf{Refactoring} & \bf{Warnings} & 
+\bf{Errors} & \bf{Global Eval.}\\ [0.5ex] 
+  \hline
+   Control.py & 8  & 0 & 0 & 0 & 7.14\\
+  \hline
+   Calculations.py & 9  & 0 & 0 & 0 & 5.50\\
+  \hline
+   InputFormat.py & 5 & 0 & 0 & 0 & 8.75\\
+  \hline
+   InputParameters.py & 3  & 1 & 1 & 0 & -15.00\\
+  \hline
+   InputConstraints.py & 17 & 0 & 0 & 0 & 5.50\\
+  \hline
+   OutputFormat.py & 5 & 0 & 0 & 0 & 6.88\\
+  \hline
+\end{tabular}
+\captionof{table}{Linting Results}\label{lintingresults}
+\end{center}	
+
+\begin{center}
+ \begin{tabular}{||c|c|c||} 
+ \hline
+  \bf{Test} & \bf{Test Description} & \bf{Verification Complete}\\ [0.5ex] 
+  \hline
+   T-9 & Linting for \progname{} Modules   & \checkmark \\
+  \hline
+\end{tabular}
+\captionof{table}{Non-functional Requirements Evaluation: Understandability}
+\label{table_understandability}
+\end{center}	
+
+
+\subsection{Reliability}
+
+A successful test is specified by the automatic verification of a total run time 
+of less than 0.1 seconds. As seen in Figure \ref{Fig_cprofile}, the run time is 
+0.007 seconds and passes the reliability test. Overall, the verification of 
+reliability has been successful as seen in table \ref{table_reliability}. 
+Documentation of test results can be found on the github repository: 
+\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test}.
+
+ \begin{figure}[H]
+ \begin{center}
+ %\rotatebox{-90}
+ {
+  \includegraphics[width=1\textwidth]{cprofile.JPG}
+ }
+ \caption{Reliability Test: Dynamic Analysis using cProfile}
+
+ \label{Fig_cprofile}
+ \end{center}
+ \end{figure}
+
+
+\begin{center}
+ \begin{tabular}{||c|c|c||} 
+ \hline
+  \bf{Test} & \bf{Test Description} & \bf{Verification Complete}\\ [0.5ex] 
+  \hline
+   T-10 & Reliability   & \checkmark \\
+  \hline
+\end{tabular}
+\captionof{table}{Non-functional Requirements Evaluation: Reliability}
+\label{table_reliability}
+\end{center}	
+
+
+\subsection{Maintainability}
+
+Testing for maintainability involves the manual verification of traceability 
+from tests to requirements seen in table \ref{Table:R_trace} and traceability 
+from tests to modules seen in table \ref{Table:M_trace}. From these tables,
+it is seen that each requirement and module is tested. In addition, traceability 
+matrices in the SRS and VnV document are completed and demonstrate traceability 
+to 
+ensure maintainability of the software \citep{DrasilSRS}. Overall, the 
+verification of 
+maintainability has been successful as seen in table 
+\ref{table_maintainability}.
+
+\begin{center}
+ \begin{tabular}{||c|c|c||} 
+ \hline
+  \bf{Test} & \bf{Test Description} & \bf{Verification Complete}\\ [0.5ex] 
+  \hline
+   T-11 & Maintainability   & \checkmark \\
+  \hline
+\end{tabular}
+\captionof{table}{Non-functional Requirements Evaluation: Maintainability}
+\label{table_maintainability}
+\end{center}	
+
+\subsection{Portability}
+
+A successful test is specified by the completion of the make command. 
+As seen in Figure \ref{table_os}, the make is completed for Windows OS and 
+Linux OS, and passes the portability test. Overall, the verification of 
+portability has been successful as seen in table \ref{table_portability}.
+
+\begin{center}
+ \begin{tabular}{||c|c||} 
+ \hline
+  \bf{OS}  & \bf{Make Completed}\\ [0.5ex] 
+  \hline
+    Windows OS  & \checkmark \\
+  \hline
+    Linux OS    & \checkmark \\
+  \hline
+\end{tabular}
+\captionof{table}{Portability test: OS and Make Completion}
+\label{table_os}
+\end{center}	
+
+
+\begin{center}
+ \begin{tabular}{||c|c|c||} 
+ \hline
+  \bf{Test} & \bf{Test Description} & \bf{Verification Complete}\\ [0.5ex] 
+  \hline
+   T-12 & Portability   & \checkmark \\
+  \hline
+\end{tabular}
+\captionof{table}{Non-functional Requirements Evaluation: Portability}
+\label{table_portability}
+\end{center}	
+
+\subsection{Verifiability}
+
+Successful verification testing is indicated by the successful manual 
+verification of tests T-1 to T-15. The verifiability of functional requirements 
+is determined by the verification of functional requirement system testing seen 
+in section \ref{fr_eval} and unit testing seen in section \ref{unittesting}. The 
+verifiability of nonfunctional requirements is determined by the verification of 
+non-functional requirement system testing seen in section \ref{nfr_eval}. 
+Overall, the verification of verifiability has been successful as seen in table 
+\ref{table_verifiability}.
+
+\begin{center}
+ \begin{tabular}{||c|c|c||} 
+ \hline
+  \bf{Test} & \bf{Test Description} & \bf{Verification Complete}\\ [0.5ex] 
+  \hline
+   T-13 & Verifiability of Functional Requirements  & \checkmark \\
+  \hline
+   T-14 & Verifiability of Nonfunctional Requirements   & \checkmark \\
+  \hline
+\end{tabular}
+\captionof{table}{Non-functional Requirements Evaluation: Verifiability}
+\label{table_verifiability}
+\end{center}	
+
+\section{Comparison to Existing Implementation}\label{validation}
 
 This section will not be appropriate for every project.
 
-\section{Unit Testing}
+Documentation of validation results can be found on the github repository: 
+\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test}.
 
-\section{Changes Due to Testing}
+\section{Unit Testing}\label{unittesting}
 
-\section{Automated Testing}
+\subsection{Calculations Module}
+
+Unit testing for Calculations.py was completed using unittest in the Spyder IDE. 
+Exceptions were raised if the module was not behaving properly. For T-14, the 
+test cases displayed the OK indicator classifying the test as successful as seen 
+for testcase7b.txt in Figure \ref{Fig_unittestexample}. Overall, the unit test 
+cases were successful as seen in table \ref{table_unit}. Documentation of test 
+results can be found on the github repository: 
+\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test}.
+
+ \begin{figure}[h!]
+ \begin{center}
+ %\rotatebox{-90}
+ {
+  \includegraphics[width=1\textwidth]{unittestexample.jpg}
+ }
+ \caption{Unit Test Example: Calculations.py, testcase7b.txt}
+
+ \label{Fig_unittestexample}
+ \end{center}
+ \end{figure}
+
+
+\begin{center}
+ \begin{tabular}{||c|c|c||} 
+ \hline
+  \bf{Test} & \bf{Test Description} & \bf{Verification Complete}\\ [0.5ex] 
+  \hline
+   T-15 & Test for Calculations.py & \checkmark \\
+  \hline
+\end{tabular}
+\captionof{table}{Unit testing Evaluation}
+\label{table_unit}
+
+\end{center}	
+
+\section{Changes Due to Testing}\label{changes}
+
+No major changes were implemented due to testing. However, during the linting 
+process, the variable of elimination rate was changed from $\lambda$ to $k$ as 
+ASCII characters are did not follow coding standards.
+
+\section{Automated Testing}\label{autotesting}
+
+The automated testing tool used by \progname{} is Travis CI. The build can be 
+found on the github repository: Documentation of test results can be found on 
+the github repository: 
+\href{https://github.com/andreamclemeno/Drasil}{andreamclemeno/Drasil}.
+
 		
 \section{Trace to Requirements}
-		
-\section{Trace to Modules}		
 
-\section{Code Coverage Metrics}
+
+The purpose of the traceability matrices is to provide easy references on what
+has to be additionally modified if a certain component is changed.  Every time a
+component is changed, the items in the column of that component that are marked
+with an ``X'' may have to be modified as well.  Table~\ref{Table:R_trace} shows 
+which test cases are supporting which requirements.
+
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{||c||c|c|c|c|c|c|c|c|c|c||}
+\hline
+	& R1 & R2 & R3 & R4 & R5 & NF1 & NFR2 & NFR3 & NFR4 & NFR5 \\
+\hline
+T-1        	& X& X& X& X& X& & & & & \\
+\hline
+T-2			& X& X& & & & & & & &\\
+\hline
+T-3        	& X& X& & & & & & & &\\
+\hline
+T-4			& X& X& & & & & & &  &\\
+\hline
+T-5       	& X& X& & & & & & & &\\
+\hline
+T-6			& X& X& & & & & & & &\\
+\hline
+T-7        	& X& X& & & & & & & &\\
+\hline
+T-8			& X& X&X & X& X& & & & &\\ 
+\hline
+T-9        	& & & & & &X & & & &\\
+\hline
+T-10 		& & & & & &X & & & &\\
+\hline
+T-11        	& & & & & & &X & & &\\
+\hline
+T-12			& & & & & & & &X & &\\ 
+\hline
+T-13        	& & & & & & & & &X &\\
+\hline
+T-14			& & & & & & & & & &X\\
+\hline
+T-15        	& & &X & & & & & & &\\
+\hline
+
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Requirements and 
+Tests}
+\label{Table:R_trace}
+\end{table}
+		
+\section{Trace to Modules}	
+
+
+The purpose of the traceability matrices is to provide easy references on what
+has to be additionally modified if a certain component is changed.  Every time a
+component is changed, the items in the column of that component that are marked
+with an ``X'' may have to be modified as well.  Table~\ref{Table:M_trace} shows 
+which test are supporting which modules.
+
+\begin{landscape}
+\begin{table}[ht]
+\centering
+\begin{tabular}{||c||c|c|c|c|c|c||}
+\hline
+	& Calculations.py & Control.py & InputConstraints.py & InputFormat.py & 
+InputParameter.py & OutputFormat.py \\
+\hline
+T-1        	&X &X &X &X &X &X  \\
+\hline
+T-2			& & & & & &  \\
+\hline
+T-3        	& & & & & &  \\
+\hline
+T-4			& & & & & &  \\
+\hline
+T-5        	& & & & & &  \\
+\hline
+T-6			& & & & & &  \\
+\hline
+T-7			& & & & & &  \\
+\hline
+T-8			&X &X &X &X &X &X  \\
+\hline
+T-9			& & & & & &  \\
+\hline
+T-10			& & & & & &  \\
+\hline
+T-11			& & & & & &  \\
+\hline
+T-12			& & & & & &  \\
+\hline
+T-13			& & & & & &  \\
+\hline
+T-14			& & & & & &  \\
+\hline
+T-15			& & &X & & &  \\
+\hline
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Modules and 
+Tests}
+\label{Table:M_trace}
+\end{table}
+\end{landscape}	
 
 \bibliographystyle{plainnat}
 
-\bibliography{../../refs/References}
+\bibliography{references.bib}
+~\newpage
 
 \end{document}
+
+
+
