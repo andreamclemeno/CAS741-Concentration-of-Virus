@@ -1,0 +1,14 @@
+No config file found, using default configuration
+************* Module Calculations
+C0303: 16,0: : Trailing whitespace
+C0303: 33,0: : Trailing whitespace
+C0103:  1,0: : Module name "Calculations" doesn't conform to snake_case naming style
+C0111:  1,0: : Missing module docstring
+C0103:  9,0: func_k: Argument name "inParams" doesn't conform to snake_case naming style
+C0111:  9,0: func_k: Missing function docstring
+C0103: 23,0: func_N_p: Function name "func_N_p" doesn't conform to snake_case naming style
+C0103: 23,0: func_N_p: Argument name "inParams" doesn't conform to snake_case naming style
+C0111: 23,0: func_N_p: Missing function docstring
+
+------------------------------------------------------------------
+Your code has been rated at 5.50/10 (previous run: 5.50/10, +0.00)
