@@ -1,0 +1,14 @@
+No config file found, using default configuration
+************* Module Control
+C0103:  1,0: : Module name "Control" doesn't conform to snake_case naming style
+C0111:  1,0: : Missing module docstring
+C0103: 12,0: : Constant name "filename" doesn't conform to UPPER_CASE naming style
+C0103: 13,0: : Constant name "outfile" doesn't conform to UPPER_CASE naming style
+C0103: 18,0: : Constant name "inParams" doesn't conform to UPPER_CASE naming style
+C0103: 22,0: : Constant name "outfile" doesn't conform to UPPER_CASE naming style
+C0103: 27,0: : Constant name "N_p" doesn't conform to UPPER_CASE naming style
+C0103: 28,0: : Constant name "outfile" doesn't conform to UPPER_CASE naming style
+
+------------------------------------------------------------------
+Your code has been rated at 7.14/10 (previous run: 7.14/10, +0.00)
+
