@@ -1,0 +1,23 @@
+# IPython log file
+
+runfile('/home/bodhi/Repos/Drasil/code/build/Diagnose/src/python/Control.py', wdir='/home/bodhi/Repos/Drasil/code/build/Diagnose/src/python')
+runfile('/home/bodhi/Repos/Drasil/code/build/Diagnose/src/python/Control.py', wdir='/home/bodhi/Repos/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Repos/Drasil/code/drasil-example/Drasil/Diagnose/inputfiles/testcase1a.txt')
+runfile('/home/bodhi/Repos/Drasil/code/build/Diagnose/src/python/InputConstraints.py', wdir='/home/bodhi/Repos/Drasil/code/build/Diagnose/src/python')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase1a.txt')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase2a.txt')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase1a.txt') > unittestoutput.txt
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase1a.txt') > unittestoutput.txt
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase1a.txt')
+get_ipython().magic('clear ')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase1a.txt')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase2a.txt')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase2b.txt')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase3a.txt')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase3b.txt')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase4a.txt')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase5a.txt')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase5b.txt')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase6a.txt')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase6b.txt')
+runfile('/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test_Calculations.py', wdir='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python', args='/home/bodhi/Reposnew/Drasil/code/build/Diagnose/src/python/test/testcase7a.txt')
