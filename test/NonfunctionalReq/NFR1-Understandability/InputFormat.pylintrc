@@ -1,0 +1,10 @@
+No config file found, using default configuration
+************* Module InputFormat
+C0303: 17,0: : Trailing whitespace
+C0103:  1,0: : Module name "InputFormat" doesn't conform to snake_case naming style
+C0111:  1,0: : Missing module docstring
+C0103:  7,0: get_input: Argument name "inParams" doesn't conform to snake_case naming style
+C0111:  7,0: get_input: Missing function docstring
+
+------------------------------------------------------------------
+Your code has been rated at 8.75/10 (previous run: 8.75/10, +0.00)

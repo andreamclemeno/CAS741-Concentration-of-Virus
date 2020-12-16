@@ -1,0 +1,10 @@
+No config file found, using default configuration
+************* Module OutputFormat
+C0303: 17,0: : Trailing whitespace
+C0103:  1,0: : Module name "OutputFormat" doesn't conform to snake_case naming style
+C0111:  1,0: : Missing module docstring
+C0103:  7,0: write_output: Argument name "N_p" doesn't conform to snake_case naming style
+C0111:  7,0: write_output: Missing function docstring
+
+------------------------------------------------------------------
+Your code has been rated at 6.88/10 (previous run: 6.88/10, +0.00)

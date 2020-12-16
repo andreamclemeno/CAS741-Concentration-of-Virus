@@ -1,0 +1,30 @@
+No config file found, using default configuration
+************* Module InputConstraints
+C0303: 13,0: : Trailing whitespace
+C0325: 14,0: : Unnecessary parens after 'if' keyword
+C0325: 14,0: : Unnecessary parens after 'not' keyword
+C0326: 14,0: : No space allowed before :
+    if (not(inParams.N_o > 0)) :
+                               ^
+C0325: 22,0: : Unnecessary parens after 'if' keyword
+C0326: 22,0: : No space allowed before :
+    if (not(0 < inParams.N_t and inParams.N_t < inParams.N_o)) :
+                                                               ^
+C0325: 33,0: : Unnecessary parens after 'if' keyword
+C0326: 33,0: : No space allowed before :
+    if (not(0 < inParams.t_t and inParams.t_t < inParams.t_p)) :
+                                                               ^
+C0325: 44,0: : Unnecessary parens after 'if' keyword
+C0325: 44,0: : Unnecessary parens after 'not' keyword
+C0326: 44,0: : No space allowed before :
+    if (not(inParams.t_p > 0)) :
+                               ^
+C0103:  1,0: : Module name "InputConstraints" doesn't conform to snake_case naming style
+C0111:  1,0: : Missing module docstring
+C0103:  6,0: input_constraints: Argument name "inParams" doesn't conform to snake_case naming style
+C0111:  6,0: input_constraints: Missing function docstring
+C0122: 22,12: input_constraints: Comparison should be inParams.N_t > 0
+C0122: 33,12: input_constraints: Comparison should be inParams.t_t > 0
+
+------------------------------------------------------------------
+Your code has been rated at 6.22/10 (previous run: 6.22/10, +0.00)
