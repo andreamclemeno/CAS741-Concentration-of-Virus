@@ -128,6 +128,10 @@ Lastly, the automated testing evaluations will be mentioned in section
 
 \subsection{Input Verification}
 
+These input verification tests were completed using pytest and the methods mentioned in the VnV plan of \progname{}.Documentation of test results can be found on the 
+github repository: 
+\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test}.
+
 \begin{center}
  \begin{tabular}{||c|c|c||} 
  \hline
@@ -153,8 +157,11 @@ Lastly, the automated testing evaluations will be mentioned in section
 
 \end{center}	
 
-
 \subsection{Output Correctness}
+
+These output correctness was verified using pytest and the methods mentioned in the VnV plan of \progname{}.Documentation of test results can be found on the 
+github repository: 
+\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test}.
 
 \begin{center}
  \begin{tabular}{||c|c|c||} 
@@ -281,7 +288,7 @@ maintainability has been successful as seen in table
 \subsection{Portability}
 
 A successful test is specified by the completion of the make command. 
-As seen in Figure \ref{table_os}, the make is completed for Windows OS and 
+As seen in table \ref{table_os}, the make is completed for Windows OS and 
 Linux OS, and passes the portability test. Overall, the verification of 
 portability has been successful as seen in table \ref{table_portability}.
 
@@ -339,10 +346,78 @@ Overall, the verification of verifiability has been successful as seen in table
 
 \section{Comparison to Existing Implementation}\label{validation}
 
-This section will not be appropriate for every project.
-
-Documentation of validation results can be found on the github repository: 
+The validation of \progname{} was completed by comparing the outputs of the 
+software to several cases from scientific study called Modeling plasma virus 
+concentration during primary HIV infection seen in The Journal of Theoretical 
+Biology
+\citep{Stafford2000}. For more documentation of validation results can be found on the github repository: 
 \href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test}.
+
+The validation was completed using patient 1-4 and 6-10 data from \citet{Stafford2000} seen in table \ref{patient}. For simplicity, patient 1-4 and 6-10 will be referred to as patients 1-7.
+
+\begin{center}
+ \begin{tabular}{||c||c|c|c|c||} 
+ \hline
+  \bf{Patient}  & \textbf{$N_{o}$ ($\frac{mol}{mL}$)} & \textbf{$N_{t}$ ($\frac{mol}{mL}$)} & \textbf{$t_{t}$ (d)} & \textbf{$t_{p}$ (d)}\\ [0.5ex] 
+  \hline
+   1 & 94760000	 & 70620000	 & 2 & 8\\
+  \hline
+   2 & 28400000	 & 21600000	 & 1 & 9\\
+  \hline
+   3 & 148500000	 & 70160000	 & 5 & 7\\
+  \hline
+   4 & 239860000	 & 33720000	 & 5 & 8\\
+  \hline
+   5 & 242790000	 & 220040000	 & 3 & 7\\
+  \hline
+   6 & 35540000	 & 14680000 & 4 & 11\\
+  \hline
+   7 & 962280000 & 783000000	 & 1 & 5\\
+  \hline
+\end{tabular}
+\captionof{table}{Software Validation: Patient 1-9 data}
+\label{patient}
+\end{center}	
+
+The data from table \ref{patient} is compared with data from the \progname{} software and the theoretical error is found and presented in table \ref{comparestudy}. Additionally, \href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test} contains graphs for easier comparison similar to in figure \ref{Fig_graphexample}.  
+
+\begin{center}
+ \begin{tabular}{||c||c|c|c||} 
+ \hline
+  \bf{Patient}  & \textbf{Strafford $N_{p}$ ($\frac{mol}{mL}$)} & \textbf{Diagnose $N_{p}$ ($\frac{mol}{mL}$)} & \textbf{$error$ (d)} \\ [0.5ex] 
+  \hline
+   1 & 144000	 & 2.2094e-16	 & 6.5174e+23 \\
+  \hline
+   2 & 	143000 & 1.4870e-07	 &  9.6165e+15\\
+  \hline
+   3 & 	564000 & 7.9327e-13	 &  7.1097+21\\
+  \hline
+   4 & 	340600 & 0.3354	 &  1.0152e+10\\
+  \hline
+   5 & 1134300	 & 4.8829e-85	 &  2.3229e+94\\
+  \hline
+   6 & 100900	 & 8.6790e-15 &  1.1625e+23\\
+  \hline
+   7 & 7158100 & 0.0282	 &  2.5339e+11\\
+  \hline
+\end{tabular}
+\captionof{table}{Software Validation: Viral Load from \citet{Stafford2000} vs  Diagnose}
+\label{comparestudy}
+\end{center}	
+
+\begin{figure}[h!]
+ \begin{center}
+ %\rotatebox{-90}
+ {
+  \includegraphics[width=1\textwidth]{graphexample.jpg}
+ }
+ \caption{Viral Load from \citet{Stafford2000} vs  Diagnose: Patient 7}
+
+ \label{Fig_graphexample}
+ \end{center}
+ \end{figure}
+
+
 
 \section{Unit Testing}\label{unittesting}
 
