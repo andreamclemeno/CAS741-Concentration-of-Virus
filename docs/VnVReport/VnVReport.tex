@@ -84,6 +84,8 @@ apply to this document. Documents can be found in \citet{SRS} and
 \noindent \begin{longtable*}{l p{8cm}} \toprule
 \textbf{symbol} & \textbf{description}\\
 \midrule 
+pbbt & Python Black Box Testing
+\\
 SRS & Software Requirements Specification
 \\
 T & Test 
@@ -128,9 +130,9 @@ Lastly, the automated testing evaluations will be mentioned in section
 
 \subsection{Input Verification}
 
-These input verification tests were completed using pytest and the methods mentioned in the VnV plan of \progname{}.Documentation of test results can be found on the 
+These input verification tests were implemented using pbbt and verified using the methods mentioned in the VnV plan of \progname{}. Documentation of test results can be found in the 
 github repository: 
-\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test}.
+\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test/FunctionalReq/OutputCorrectness}{CAS741-Diagnose/test/ FunctionalReq/InputVerification}. The documentation includes input.yaml and output.yaml files that display the successful tests as well as terminal verification of passed tests.
 
 \begin{center}
  \begin{tabular}{||c|c|c||} 
@@ -159,9 +161,9 @@ github repository:
 
 \subsection{Output Correctness}
 
-These output correctness was verified using pytest and the methods mentioned in the VnV plan of \progname{}.Documentation of test results can be found on the 
+This output correctness test was implemented using pbbt and verified using the methods mentioned in the VnV plan of \progname{}. Documentation of test results can be found in the 
 github repository: 
-\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test}.
+\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{CAS741-Diagnose/test/ FunctionalReq/OutputCorrectness}. The documentation includes input.yaml and output.yaml files that display the successful tests as well as terminal verification of passed tests.
 
 \begin{center}
  \begin{tabular}{||c|c|c||} 
@@ -187,7 +189,7 @@ no error messages seen in table \ref{lintingresults}. Overall, the verification
 of understandability has been successful as seen in table 
 \ref{table_understandability}. Documentation of test results can be found on the 
 github repository: 
-\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test}.
+\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test/NonfunctionalReq/NFR1-Understandability}{CAS741-Diagnose/test/NonfunctionalReq/NFR1-Understandability/}. Documentation includes .pylintrc files that display the output of linting.
 
 \begin{center}
  \begin{tabular}{||c|c|c|c|c|c||} 
@@ -227,12 +229,12 @@ github repository:
 
 \subsection{Reliability}
 
-A successful test is specified by the automatic verification of a total run time 
+A successful test is specified by the verification of a total run time 
 of less than 0.1 seconds. As seen in Figure \ref{Fig_cprofile}, the run time is 
 0.007 seconds and passes the reliability test. Overall, the verification of 
 reliability has been successful as seen in table \ref{table_reliability}. 
 Documentation of test results can be found on the github repository: 
-\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test}.
+\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test/NonfunctionalReq/NFR2-Reliability}{CAS741-Diagnose/test/NonfunctionalReq/NFR2-Reliability}. The documentation includes a text file with the terminal output of the cProfile command.
 
  \begin{figure}[H]
  \begin{center}
@@ -379,7 +381,7 @@ The validation was completed using patient 1-4 and 6-10 data from \citet{Staffor
 \label{patient}
 \end{center}	
 
-The data from table \ref{patient} is compared with data from the \progname{} software and the theoretical error is found and presented in table \ref{comparestudy}. Additionally, \href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test} contains graphs for easier comparison similar to in figure \ref{Fig_graphexample}.  
+The data from table \ref{patient} is compared with data from the \progname{} software and the theoretical error is found and presented in table \ref{comparestudy}. Additionally, \href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test} contains graphs for easier comparison. An example of patient 7 can be seen in figure \ref{Fig_graphexample}.  
 
 \begin{center}
  \begin{tabular}{||c||c|c|c||} 
@@ -428,8 +430,7 @@ Exceptions were raised if the module was not behaving properly. For T-14, the
 test cases displayed the OK indicator classifying the test as successful as seen 
 for testcase7b.txt in Figure \ref{Fig_unittestexample}. Overall, the unit test 
 cases were successful as seen in table \ref{table_unit}. Documentation of test 
-results can be found on the github repository: 
-\href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose/test}.
+results can be found on the github repository: \href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test/UnitTesting}{CAS741-Diagnose/test/UnitTesting}. The documentation includes the output of all test cases mentioned in the VnV plan \citep{DiagnoseVNVplan}.
 
  \begin{figure}[h!]
  \begin{center}
@@ -466,9 +467,7 @@ ASCII characters are did not follow coding standards.
 \section{Automated Testing}\label{autotesting}
 
 The automated testing tool used by \progname{} is Travis CI. The build can be 
-found on the github repository: Documentation of test results can be found on 
-the github repository: 
-\href{https://github.com/andreamclemeno/Drasil}{andreamclemeno/Drasil}.
+found on the github repository: \href{https://github.com/andreamclemeno/Drasil}{andreamclemeno/Drasil}. The build has not completed as of December 15, 2020 due to redundant brackets and error in adding author information. 
 
 		
 \section{Trace to Requirements}
