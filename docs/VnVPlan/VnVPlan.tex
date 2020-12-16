@@ -63,6 +63,7 @@ Plan for \progname{}}
 12/10/2020  & 1.3 & Updating to address comments\\
 12/12/2020  & 1.4 & Updating to Dr. Smith's comments\\
 12/14/2020  & 1.5 & Second Draft of VnV plan\\
+12/15/2020 & 2.0 & Final Documentation of VnV Plan\\
 \bottomrule
 \end{tabularx}
 
@@ -98,6 +99,8 @@ all symbols, abbreviations, and acronyms recorded in the SRS for \progname{}
 N/A & Not Applicable
 \\
 OS & Operating System
+\\
+pbbt & Python Black Box Testing tool
 \\
 SRS & Software Requirements Specification
 \\
@@ -167,14 +170,14 @@ Andrea Clemeno, the domain expert reviewer, Elizabeth Hofer, and the secondary
 reviewer, John Ernsthausen. In addition, Dr.\ Smith, the CAS 741 course 
 instructor, will review the VnV plan. The reviewers will ensure the document is 
 in accordance with the VnV plan checklist \citep{Vnvchecklist}. The feedback 
-is provided using issues on GitHub repository: CAS741-Diagnose. 
+is provided using issues on GitHub repository: \href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose}. 
 
 \subsection{SRS Verification Plan}
 
 The verification of the SRS will be done to ensure that the requirements 
 specified are in alignment with the outlined objective of the \progname{} 
 program. The feedback 
-is provided using issues on GitHub repository: CAS741-Diagnose. The 
+is provided using issues on GitHub repository: \href{https://github.com/andreamclemeno/CAS741-Diagnose/tree/master/test}{andreamclemeno/CAS741-Diagnose}. The 
 reviewers that will verify the SRS document include: the class instructor, Dr. 
 Smith;  the domain expert reviewer, Elizabeth Hofer; the secondary reviewer, 
 Tiago de Moraes Machado; the project developer, Andrea Clemeno.
@@ -218,7 +221,7 @@ Automated testing will be implemented for individual units as well as the
 integrated system to ensure that all the sections work separately and together 
 seamlessly. In terms of unit  testing, some modules will be tested with the 
 unittest python library within Spyder. Respectively, the systems test will be 
-completed through black box testing with Pytest.
+completed through black box testing with Python Black Box Testing framework.
 
 Lastly, the implementation of the design will be verified with continuous 
 integration through Travis CI that is used in conjunction with Drasil. Drasil 
@@ -236,7 +239,7 @@ complete automated tests to verify the code \citep{Drasil}.
  \hline
   Dynamic Analysis & cProfile \\
  \hline
-  System Test & Pytest\\
+  System Test & pbbt\\
  \hline
   Unit Test & unittest \\
  \hline
@@ -256,7 +259,8 @@ validation of \progname{} will be completed by comparing the outputs of the
 software to several cases from scientific study called Modeling plasma virus 
 concentration during primary HIV infection seen in The Journal of Theoretical 
 Biology
-\citep{Stafford2000}.
+\citep{Stafford2000}. The theoretical error between the viral loads recorded in the study and the predicted viral loads calculated by \progname{} will be found. In addition, graphs for easier comparison will be used to validate the software.
+
 
 \section{System Test Description} \label{systestcases}
 
@@ -270,8 +274,8 @@ several requirements that are be separated based on common ideas.
 
 \subsubsection{Input Verification}
 
-The inputs will undergo tests to satisfy R1 and R2 from \progname{} SRS. 
-Specifically ensuring values are input and align with the input constraints. 
+The inputs will undergo tests to satisfy R1, R2, and R5 from \progname{} SRS. 
+Specifically, this test will ensure values are input, align with the input constraints and can be implemented with InputParameters.py. 
 
 Table \ref{tabletestcases} displays the inputs and outputs of test cases for the 
 input constraints tests.
@@ -281,27 +285,27 @@ input constraints tests.
  \hline
  \textbf{Test Cases} & \textbf{$N_{o}$ ($\frac{mol}{mL}$)} & \textbf{$N_{t}$ ($\frac{mol}{mL}$)} & \textbf{$t_{t}$ (d)} & \textbf{$t_{p}$ (d)} & \textbf{Output}\\ [0.5ex] 
  \hline
- TC-1-1 & 12000000 & 5000000 & 1 & 30 & - \\ 
+ testcase1a & 12000000 & 5000000 & 1 & 30 & - \\ 
  \hline
- TC-2-1 & 0 & 5000000 & 1 & 30 & Exception: InputError\\
+ testcase2a & 0 & 5000000 & 1 & 30 & Exception: InputError\\
  \hline
- TC-2-2 & -12000000 & 5000000 & 1 & 30 & Exception: InputError\\
+ testcase2b & -12000000 & 5000000 & 1 & 30 & Exception: InputError\\
  \hline
- TC-3-1 & 12000000 & 0 & 1 & 30 & Exception: InputError\\
+ testcase3a & 12000000 & 0 & 1 & 30 & Exception: InputError\\
  \hline
- TC-3-2 & 12000000 & -5000000 & 1 & 30 & Exception: InputError\\ 
+ testcase3b & 12000000 & -5000000 & 1 & 30 & Exception: InputError\\ 
  \hline
- TC-4-1 & 5000000 & 12000000 & 1 & 30 & Exception: InputError\\ 
+ testcase4a & 5000000 & 12000000 & 1 & 30 & Exception: InputError\\ 
  \hline
- TC-5-1 & 12000000 & 5000000 & 0 & 30 & Exception: InputError\\
+ testcase5a & 12000000 & 5000000 & 0 & 30 & Exception: InputError\\
  \hline
- TC-5-2 & 12000000 & 5000000 & -1 & 30 & Exception: InputError\\
+ testcas5b & 12000000 & 5000000 & -1 & 30 & Exception: InputError\\
  \hline
- TC-6-1 & 12000000 & 5000000 & 1 & 0 & Exception: InputError\\
+ testcase6a & 12000000 & 5000000 & 1 & 0 & Exception: InputError\\
  \hline
- TC-6-2 & 12000000 & 5000000 & 1 & -1 & Exception: InputError\\ 
+ testcase6b & 12000000 & 5000000 & 1 & -1 & Exception: InputError\\ 
  \hline
- TC-7-1 & 12000000 & 5000000 & 30 & 1 & Exception: InputError\\  [1ex] 
+ testcase7a & 12000000 & 5000000 & 30 & 1 & Exception: InputError\\  [1ex] 
  \hline
 \end{tabular}
 \captionof{table}{Test Cases used for Verification of 
@@ -319,14 +323,14 @@ Control: Automatic
 Initial State: N/A
 					
 Input: $N_{o}$ = 12000000 $\frac{mol}{mL}$; $N_{t}$= 5000000 $\frac{mol}{mL}$; 
-$t_{t}$ = 1 d; $t_{p}$ = 30 d (TC-1-1)
+$t_{t}$ = 1 d; $t_{p}$ = 30 d (testcase1a)
 					
 Output: $k$ = 0.8755; $N_p$ = 4.708e-05
 
 Test Case Derivation: Inputs within expected input range are used in the 
 previous test to ensure successful input.
 					
-How test will be performed: Pytest will be implemented.
+How test will be performed: The pbbt tool will be implemented.
 					
 \item{T-}\refstepcounter{tinnum}\thetinnum\label{T-2}: Invalid Input: $N_{o}$
 
@@ -334,15 +338,15 @@ Control: Automatic
 					
 Initial State: N/A
 					
-Input: TC-2-1, TC-2-2
+Input: testcase2a, testcase2b
 					
 Output: Exception: InputError
 
 Test Case Derivation: $N_{o}$ input is out of bounds and not an expected input 
-value. TC-2-1 and TC-2-2 have zero and negative inputs for $N_{o}$  
+value. $testcase2a$ and $testcase2b$ have zero and negative inputs for $N_{o}$  
 respectively. 
 
-How test will be performed: Pytest will be implemented.
+How test will be performed: The pbbt tool will be implemented.
 
 
 \item{T-}\refstepcounter{tinnum}\thetinnum\label{T-3}: Invalid Input: $N_{t}$
@@ -351,14 +355,14 @@ Control: Automatic
 					
 Initial State: N/A
 					
-Input: TC-3-1, TC-3-2
+Input: testcase3a, testcase3b
 					
 Output: Exception: InputError
 
 Test Case Derivation: $N_{t}$ input is out of bounds and not an expected input 
-value. TC-3-1 and TC-3-2 have zero and negative inputs for $N_{t}$ respectively. 
+value. $testcase3a$ and $testcase3b$ have zero and negative inputs for $N_{t}$ respectively. 
 
-How test will be performed: Pytest will be implemented.
+How test will be performed: The pbbt tool will be implemented.
 
 
 \item{T-}\refstepcounter{tinnum}\thetinnum\label{T-4}: Invalid Inputs: $N_{o}$, $N_{t}$
@@ -367,14 +371,14 @@ Control: Automatic
 					
 Initial State: N/A
 					
-Input: TC-4-1
+Input: testcase4a
 					
 Output: Exception: InputError
 
 Test Case Derivation: Relationship between $N_o$ and $N_{t}$ is invalid and out 
 of bounds and not an expected input values.
 
-How test will be performed: Pytest will be implemented.
+How test will be performed: The pbbt tool will be implemented.
 
 
 \item{T-}\refstepcounter{tinnum}\thetinnum\label{T-5}: Invalid Input: $t_{t}$
@@ -383,14 +387,14 @@ Control: Automatic
 					
 Initial State: N/A
 					
-Input: TC-5-1, TC-5-2
+Input: testcase5a, testcase5b
 					
 Output: Exception: InputError
 
 Test Case Derivation: $t_{t}$ input is out of bounds and not an expected input 
-value. TC-5-1 and TC-5-2 have zero and negative inputs for $t_{t}$ respectively. 
+value. $testcase5a$ and $testcase5b$ have zero and negative inputs for $t_{t}$ respectively. 
 
-How test will be performed: Pytest will be implemented.
+How test will be performed: The pbbt tool will be implemented.
 
 
 \item{T-}\refstepcounter{tinnum}\thetinnum\label{T-6}: Invalid Input: $t_{p}$
@@ -399,14 +403,14 @@ Control: Automatic
 					
 Initial State: N/A
 					
-Input: TC-6-1, TC-6-2
+Input: testcase6a, testcase6b
 					
 Output: Exception: InputError
 
 Test Case Derivation: $t_{p}$ input is out of bounds and not an expected input 
-value. TC-6-1 and TC-6-2 have zero and negative inputs for $t_{p}$ respectively. 
+value. $testcase6a$ and $testcase6b$ have zero and negative inputs for $t_{p}$ respectively. 
 
-How test will be performed: Pytest will be implemented.
+How test will be performed: The pbbt tool will be implemented.
 
 
 \item{T-}\refstepcounter{tinnum}\thetinnum\label{T-7}: Invalid Inputs: $t_{t}$, $t_{p}$
@@ -415,14 +419,14 @@ Control: Automatic
 					
 Initial State: N/A
 					
-Input: TC-7-1
+Input: testcase7a
 					
 Output: Exception: InputError
 
 Test Case Derivation: Relationship between $t_t$ and $t_{p}$ is invalid and out 
 of bounds and not an expected input values.
 
-How test will be performed: Pytest will be implemented.
+How test will be performed: The pbbt tool will be implemented.
  
 
 \end{enumerate}
@@ -438,14 +442,14 @@ Control: Automatic
 Initial State: N/A
 					
 Input: $N_{o}$ = 12000000 $\frac{mol}{mL}$; $N_{t}$= 5000000 $\frac{mol}{mL}$; 
-$t_{t}$ = 1 d; $t_{p}$ = 30 d (TC-1-1)
+$t_{t}$ = 1 d; $t_{p}$ = 30 d (testcase1a)
 					
 Output: $k$ = 0.8755; $N_p$ = 4.708e-05
 
 Test Case Derivation: Inputs within expected input range are used in the 
 previous test to ensure the correct values produce an output.
 					
-How test will be performed: Pytest will be implemented.
+How test will be performed: The pbbt tool will be implemented.
 
 
 \end{enumerate}
@@ -470,7 +474,7 @@ Type: Automatic
 					
 Initial State: Python code generated.
 					
-Input: Generated modular python code and TC-1-1 from table \ref{tabletestcases}.
+Input: Generated modular python code and testcase1a from table \ref{tabletestcases}.
 					
 Output: Convention, refactor, warning and error messages.
 					
@@ -645,7 +649,7 @@ Tests}
 
 The design of the generated python code into modules can be attributed to the 
 Drasil framework. The documentation of the knowledge captured by Drasil to 
-generate this code can be found in the Github repository: andreamclemeno/Drasil. 
+generate this code can be found in the Github repository: \href{https://github.com/andreamclemeno/Drasil}{andreamclemeno/Drasil}. 
 The plans for unit testing the modules will be outlined in the following 
 section.
 
@@ -666,15 +670,15 @@ reference names the test(s) where the testing plan can be found.
  \hline
   Calculations.py & unit & unittest in Python & \tinref{T-15}\\
   \hline
-  Control.py & system & Pytest & \tinref{T-1}, \tinref{T-8}\\
+  Control.py & system & pbbt & \tinref{T-1}, \tinref{T-8}\\
   \hline
-  InputConstraints.py & system & Pytest & \tinref{T-1}, \tinref{T-8}\\
+  InputConstraints.py & system & pbbt & \tinref{T-1}, \tinref{T-8}\\
   \hline
-  InputFormat.py & system & Pytest & \tinref{T-1}, \tinref{T-8}\\
+  InputFormat.py & system & pbbt & \tinref{T-1}, \tinref{T-8}\\
   \hline
-  InputParameter.py & system & Pytest & \tinref{T-1}, \tinref{T-8}\\
+  InputParameter.py & system & pbbt & \tinref{T-1}, \tinref{T-8}\\
   \hline
-  OutputFormat.py & system & Pytest & \tinref{T-1}, \tinref{T-8}\\
+  OutputFormat.py & system & pbbt & \tinref{T-1}, \tinref{T-8}\\
  \hline
 \end{tabular}
 \captionof{table}{\progname{} Module Testing Type and Verification Tools}
